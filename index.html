@@ -1,336 +1,441 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Muhammad Syaiful — Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-  <!-- ===== BOOTING SPLASH SCREEN ===== -->
-  <div id="bootScreen">
-    <div class="boot-content">
-      <div class="boot-brand">
-        <div class="boot-logo">
-          <i class="fas fa-microchip"></i>
-        </div>
-        <div class="boot-name">M.<span>Syaiful</span></div>
-      </div>
-      <div class="boot-loader">
-        <div class="boot-progress"></div>
-      </div>
-      <div class="boot-status">Memuat Sistem...</div>
-      <div class="boot-dots">
-        <span></span><span></span><span></span><span></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a href="#" class="nav-logo">M.<span>Syaiful</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#skills">Keahlian</a></li>
-        <li><a href="#projects">Proyek</a></li>
-        <li><a href="#gallery">Galeri</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <div></div>
-        <div></div>
-        <div></div>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" onclick="closeMobileMenu()">Tentang</a>
-    <a href="#skills" onclick="closeMobileMenu()">Keahlian</a>
-    <a href="#projects" onclick="closeMobileMenu()">Proyek</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Galeri</a>
-    <a href="#contact" onclick="closeMobileMenu()">Kontak</a>
-  </div>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <div class="hero-badge">
-            <span class="dot"></span>
-            Tersedia untuk berkolaborasi
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muhammad Syaiful — Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!-- ===== BOOTING SPLASH SCREEN ===== -->
+    <div id="bootScreen">
+      <div class="boot-content">
+        <div class="boot-brand">
+          <div class="boot-logo">
+            <i class="fas fa-microchip"></i>
           </div>
-          <h1>
-            Halo, saya<br>
-            <span class="highlight">Muhammad Syaiful</span>
-          </h1>
-          <p>
-            Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, 
-            desain, dan teknologi kreatif.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">
-              <i class="fas fa-arrow-down"></i> Lihat Proyek
-            </a>
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-envelope"></i> Hubungi Saya
-            </a>
-          </div>
+          <div class="boot-name">Muhammad<span>Syaiful</span></div>
         </div>
-        <div class="hero-image">
-          <img id="profilePhoto" src="assets/profile/IMG_20250417_160308.jpg" alt="Muhammad Syaiful" />
+        <div class="boot-loader">
+          <div class="boot-progress"></div>
+        </div>
+        <div class="boot-status">Memuat Sistem...</div>
+        <div class="boot-dots">
+          <span></span><span></span><span></span><span></span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="section" id="about">
-    <div class="container">
-      <span class="section-label">Tentang Saya</span>
-      <h2 class="section-title">Siapa Saya?</h2>
-      <p class="section-subtitle">
-        Seorang mahasiswa yang bersemangat dalam menciptakan solusi digital yang fungsional dan menarik.
-      </p>
-      <div class="about-grid">
-        <div class="about-card">
-          <div class="icon"><i class="fas fa-user-graduate"></i></div>
-          <h3>Pendidikan</h3>
-          <p>
-            Saat ini menempuh pendidikan di Politeknik Negeri Padang, 
-            mendalami ilmu teknologi dan pengembangan perangkat lunak.
-          </p>
-        </div>
-        <div class="about-card">
-          <div class="icon"><i class="fas fa-code"></i></div>
-          <h3>Pengembangan Web</h3>
-          <p>
-            Berpengalaman dalam membangun aplikasi web menggunakan HTML, CSS, JavaScript, 
-            serta eksplorasi berbagai framework modern.
-          </p>
-        </div>
-        <div class="about-card">
-          <div class="icon"><i class="fas fa-lightbulb"></i></div>
-          <h3>Kreativitas</h3>
-          <p>
-            Menyukai tantangan dalam menciptakan pengalaman digital yang unik, 
-            dari game sederhana hingga alat interaktif.
-          </p>
-        </div>
-        <div class="about-card">
-          <div class="icon"><i class="fas fa-handshake"></i></div>
-          <h3>Kolaborasi</h3>
-          <p>
-            Terbuka untuk bekerja sama dalam proyek-proyek menarik. 
-            Mari berdiskusi dan menciptakan sesuatu yang bermakna bersama.
-          </p>
-        </div>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <a href="#" class="nav-logo">M.<span>Syaiful</span></a>
+        <ul class="nav-links">
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#skills">Keahlian</a></li>
+          <li><a href="#projects">Proyek</a></li>
+          <li><a href="#gallery">Galeri</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </button>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- ===== SKILLS ===== -->
-  <section class="section" id="skills">
-    <div class="container">
-      <span class="section-label">Keahlian</span>
-      <h2 class="section-title">Teknologi yang Saya Kuasai</h2>
-      <p class="section-subtitle">
-        Berbagai tools dan teknologi yang telah saya pelajari dan gunakan dalam proyek.
-      </p>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-html5"></i></div>
-          <div class="skill-name">HTML5</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 10%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-          <div class="skill-name">CSS3</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 10%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-js"></i></div>
-          <div class="skill-name">JavaScript</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 10%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-react"></i></div>
-          <div class="skill-name">React</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 0%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-node-js"></i></div>
-          <div class="skill-name">Node.js</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 0%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fas fa-database"></i></div>
-          <div class="skill-name">Database</div>
-          <div class="skill-bar"><div class="skill-level" style="width: 15%"></div></div>
-        </div>
-      </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" onclick="closeMobileMenu()">Tentang</a>
+      <a href="#skills" onclick="closeMobileMenu()">Keahlian</a>
+      <a href="#projects" onclick="closeMobileMenu()">Proyek</a>
+      <a href="#gallery" onclick="closeMobileMenu()">Galeri</a>
+      <a href="#contact" onclick="closeMobileMenu()">Kontak</a>
     </div>
-  </section>
 
-  <!-- ===== PROJECTS ===== -->
-  <section class="section" id="projects">
-    <div class="container">
-      <span class="section-label">Proyek</span>
-      <h2 class="section-title">Karya Terbaru</h2>
-      <p class="section-subtitle">
-        Beberapa proyek yang telah saya kerjakan, dari game hingga alat interaktif.
-      </p>
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="assets/website/puzzle.jpg" alt="Game Puzzle" />
-          <div class="project-body">
-            <h3>Game Puzzle Sederhana</h3>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-badge">
+              <span class="dot"></span>
+              Tersedia untuk berkolaborasi
+            </div>
+            <h1>
+              Halo, saya<br />
+              <span class="highlight">Muhammad Syaiful</span>
+            </h1>
             <p>
-              Puzzle interaktif yang dapat menyelesaikan dirinya sendiri 
-              dengan fitur auto-solve. Dibangun dengan JavaScript murni.
+              Mahasiswa Politeknik Negeri Padang yang antusias dalam
+              pengembangan web, desain, dan teknologi kreatif.
+            </p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">
+                <i class="fas fa-arrow-down"></i> Lihat Proyek
+              </a>
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fas fa-envelope"></i> Hubungi Saya
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              id="profilePhoto"
+              src="assets/profile/IMG_20250417_160308.jpg"
+              alt="Muhammad Syaiful"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <span class="section-label">Tentang Saya</span>
+        <h2 class="section-title">Siapa Saya?</h2>
+        <p class="section-subtitle">
+          Seorang mahasiswa yang bersemangat dalam menciptakan solusi digital
+          yang fungsional dan menarik.
+        </p>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="icon"><i class="fas fa-user-graduate"></i></div>
+            <h3>Pendidikan</h3>
+            <p>
+              Saat ini menempuh pendidikan di Politeknik Negeri Padang,
+              mendalami ilmu teknologi dan pengembangan perangkat lunak.
+            </p>
+            <div class="edu-list">
+              <div class="edu-item">
+                <span class="edu-icon"><i class="fas fa-school"></i></span>
+                <span><strong>SD</strong> — SDN 01 Pangian</span>
+              </div>
+              <div class="edu-item">
+                <span class="edu-icon"><i class="fas fa-school"></i></span>
+                <span><strong>SMP</strong> — SMPN 1 Lintau Buo</span>
+              </div>
+              <div class="edu-item">
+                <span class="edu-icon"><i class="fas fa-school"></i></span>
+                <span><strong>SMA</strong> — SMAN 2 Lintau Buo</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="icon"><i class="fas fa-code"></i></div>
+            <h3>Pengembangan Web</h3>
+            <p>
+              Berpengalaman dalam membangun aplikasi web menggunakan HTML, CSS,
+              JavaScript, serta eksplorasi berbagai framework modern.
             </p>
           </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/website/kalkulator ngawur.jpg" alt="Kalkulator Ngawur" />
-          <div class="project-body">
-            <h3>Kalkulator Ngawur</h3>
+          <div class="about-card">
+            <div class="icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Kreativitas</h3>
             <p>
-              Kalkulator unik dengan jawaban yang selalu tidak terduga 
-              dan sentuhan humor di setiap perhitungan.
+              Menyukai tantangan dalam menciptakan pengalaman digital yang unik,
+              dari game sederhana hingga alat interaktif.
             </p>
           </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/website/Event Kampus.jpg" alt="Event Kampus" />
-          <div class="project-body">
-            <h3>Event Kampus</h3>
+          <div class="about-card">
+            <div class="icon"><i class="fas fa-handshake"></i></div>
+            <h3>Kolaborasi</h3>
             <p>
-              Website informasi dan dokumentasi acara-acara yang 
-              diselenggarakan di lingkungan kampus.
-            </p>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/website/WebGis.jpg" alt="WebGIS" />
-          <div class="project-body">
-            <h3>WebGIS</h3>
-            <p>
-              Aplikasi Geographic Information System berbasis web 
-              untuk visualisasi data spasial dan pemetaan.
-            </p>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="assets/website/Jadwal Kampus.jpg" alt="Jadwal Kampus" />
-          <div class="project-body">
-            <h3>Jadwal Kampus</h3>
-            <p>
-              Website untuk melihat dan mengelola jadwal perkuliahan 
-              dengan tampilan yang informatif dan mudah digunakan.
+              Terbuka untuk bekerja sama dalam proyek-proyek menarik. Mari
+              berdiskusi dan menciptakan sesuatu yang bermakna bersama.
             </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== GALLERY ===== -->
-  <section class="section" id="gallery">
-    <div class="container">
-      <span class="section-label">Galeri</span>
-      <h2 class="section-title">Dokumentasi</h2>
-      <p class="section-subtitle">
-        Kumpulan foto dan momen dalam perjalanan saya.
-      </p>
-      <div class="gallery-grid">
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211314.jpg" alt="Foto 1" loading="lazy" />
-        </div>
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211317.jpg" alt="Foto 2" loading="lazy" />
-        </div>
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211326.jpg" alt="Foto 3" loading="lazy" />
-        </div>
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211320.jpg" alt="Foto 4" loading="lazy" />
-        </div>
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211323.jpg" alt="Foto 5" loading="lazy" />
-        </div>
-        <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
-          <img src="assets/foto perjalanan/IMG_20250502_211326 1.jpg" alt="Foto 6" loading="lazy" />
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <span class="section-label">Keahlian</span>
+        <h2 class="section-title">Teknologi yang Saya Kuasai</h2>
+        <p class="section-subtitle">
+          Berbagai tools dan teknologi yang telah saya pelajari dan gunakan
+          dalam proyek.
+        </p>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+            <div class="skill-name">HTML5</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 10%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+            <div class="skill-name">CSS3</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 10%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fab fa-js"></i></div>
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 10%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fab fa-react"></i></div>
+            <div class="skill-name">React</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+            <div class="skill-name">Node.js</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fas fa-database"></i></div>
+            <div class="skill-name">Database</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 15%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+            <div class="skill-name">Hardware & Perakitan PC</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon"><i class="fas fa-tools"></i></div>
+            <div class="skill-name">Asisten Teknisi</div>
+            <div class="skill-bar">
+              <div class="skill-level" style="width: 65%"></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CONTACT ===== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <span class="section-label">Kontak</span>
-      <h2 class="section-title">Mari Terhubung</h2>
-      <p class="section-subtitle">
-        Jangan ragu untuk menghubungi saya melalui platform di bawah ini.
-      </p>
-      <div class="contact-links">
-        <a href="https://wa.me/6282384939468" target="_blank" class="contact-card">
-          <div class="icon"><i class="fab fa-whatsapp"></i></div>
-          <div class="info">
-            <span class="label">WhatsApp</span>
-            <span class="value">0823-8493-9468</span>
+    <!-- ===== PROJECTS ===== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <span class="section-label">Proyek</span>
+        <h2 class="section-title">Karya Terbaru</h2>
+        <p class="section-subtitle">
+          Beberapa proyek yang telah saya kerjakan, dari game hingga alat
+          interaktif.
+        </p>
+        <div class="projects-grid">
+          <div class="project-card">
+            <img src="assets/website/puzzle.jpg" alt="Game Puzzle" />
+            <div class="project-body">
+              <h3>Game Puzzle Sederhana</h3>
+              <p>
+                Puzzle interaktif yang dapat menyelesaikan dirinya sendiri
+                dengan fitur auto-solve. Dibangun dengan JavaScript murni.
+              </p>
+            </div>
           </div>
-        </a>
-        <a href="mailto:muhammadsyaiful2601@gmail.com" class="contact-card">
-          <div class="icon"><i class="far fa-envelope"></i></div>
-          <div class="info">
-            <span class="label">Email</span>
-            <span class="value">muhammadsyaiful2601@gmail.com</span>
+          <div class="project-card">
+            <img
+              src="assets/website/kalkulator ngawur.jpg"
+              alt="Kalkulator Ngawur"
+            />
+            <div class="project-body">
+              <h3>Kalkulator Ngawur</h3>
+              <p>
+                Kalkulator unik dengan jawaban yang selalu tidak terduga dan
+                sentuhan humor di setiap perhitungan.
+              </p>
+            </div>
           </div>
-        </a>
-        <a href="https://github.com" target="_blank" class="contact-card">
-          <div class="icon"><i class="fab fa-github"></i></div>
-          <div class="info">
-            <span class="label">GitHub</span>
-            <span class="value">@udingamingcd</span>
+          <div class="project-card">
+            <img src="assets/website/Event Kampus.jpg" alt="Event Kampus" />
+            <div class="project-body">
+              <h3>Event Kampus</h3>
+              <p>
+                Website informasi dan dokumentasi acara-acara yang
+                diselenggarakan di lingkungan kampus.
+              </p>
+            </div>
           </div>
-        </a>
-        <a href="https://www.tiktok.com/@udin_gaming9" target="_blank" class="contact-card">
-          <div class="icon"><i class="fab fa-tiktok"></i></div>
-          <div class="info">
-            <span class="label">TikTok</span>
-            <span class="value">@udin_gaming9</span>
+          <div class="project-card">
+            <img src="assets/website/WebGis.jpg" alt="WebGIS" />
+            <div class="project-body">
+              <h3>WebGIS</h3>
+              <p>
+                Aplikasi Geographic Information System berbasis web untuk
+                visualisasi data spasial dan pemetaan.
+              </p>
+            </div>
           </div>
-        </a>
+          <div class="project-card">
+            <img src="assets/website/Jadwal Kampus.jpg" alt="Jadwal Kampus" />
+            <div class="project-body">
+              <h3>Jadwal Kampus</h3>
+              <p>
+                Website untuk melihat dan mengelola jadwal perkuliahan dengan
+                tampilan yang informatif dan mudah digunakan.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <span class="section-label">Galeri</span>
+        <h2 class="section-title">Dokumentasi</h2>
+        <p class="section-subtitle">
+          Kumpulan foto dan momen dalam perjalanan saya.
+        </p>
+        <div class="gallery-grid">
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211314.jpg"
+              alt="Foto 1"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211317.jpg"
+              alt="Foto 2"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211326.jpg"
+              alt="Foto 3"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211320.jpg"
+              alt="Foto 4"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211323.jpg"
+              alt="Foto 5"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
+            <img
+              src="assets/foto perjalanan/IMG_20250502_211326 1.jpg"
+              alt="Foto 6"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="section-label">Kontak</span>
+        <h2 class="section-title">Mari Terhubung</h2>
+        <p class="section-subtitle">
+          Jangan ragu untuk menghubungi saya melalui platform di bawah ini.
+        </p>
+        <div class="contact-links">
+          <a
+            href="https://wa.me/6282384939468"
+            target="_blank"
+            class="contact-card"
+          >
+            <div class="icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="info">
+              <span class="label">WhatsApp</span>
+              <span class="value">0823-8493-9468</span>
+            </div>
+          </a>
+          <a href="mailto:muhammadsyaiful2601@gmail.com" class="contact-card">
+            <div class="icon"><i class="far fa-envelope"></i></div>
+            <div class="info">
+              <span class="label">Email</span>
+              <span class="value">muhammadsyaiful2601@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://github.com" target="_blank" class="contact-card">
+            <div class="icon"><i class="fab fa-github"></i></div>
+            <div class="info">
+              <span class="label">GitHub</span>
+              <span class="value">@udingamingcd</span>
+            </div>
+          </a>
+          <a
+            href="https://www.tiktok.com/@udin_gaming9"
+            target="_blank"
+            class="contact-card"
+          >
+            <div class="icon"><i class="fab fa-tiktok"></i></div>
+            <div class="info">
+              <span class="label">TikTok</span>
+              <span class="value">@udin_gaming9</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Muhammad Syaiful. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal" id="imageModal">
+      <button class="close" onclick="closeModal()">&times;</button>
+      <img id="modalImg" src="" alt="Preview" />
     </div>
-  </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Muhammad Syaiful. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- ===== SCROLL TO TOP ===== -->
+    <button id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
-  <!-- ===== MODAL ===== -->
-  <div class="modal" id="imageModal">
-    <button class="close" onclick="closeModal()">&times;</button>
-    <img id="modalImg" src="" alt="Preview" />
-  </div>
-
-  <!-- ===== SCROLL TO TOP ===== -->
-  <button id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <script src="assets/js/script.js"></script>
-</body>
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>

@@ -656,6 +656,50 @@ body {
   line-height: 1.7;
 }
 
+.edu-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--accent-soft);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+}
+
+.edu-item:hover {
+  border-color: var(--accent);
+  background: rgba(108, 92, 231, 0.18);
+  transform: translateX(4px);
+}
+
+.edu-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.edu-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* ===== SKILLS ===== */
 .skills-grid {
   display: grid;
@@ -1058,17 +1102,16 @@ footer {
   transform: scale(1.1);
 }
 
-/* ===== MOUSE GLOW EFFECT ===== */
-.mouse-glow {
+/* ===== BINARY STREAM CANVAS ===== */
+#binaryCanvas {
   position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(108, 92, 231, 0.08), transparent 70%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  transition: left 0.1s ease, top 0.1s ease;
+  z-index: 9999;
+  mix-blend-mode: screen;
 }
 
 /* ===== METEOR TRAIL ===== */

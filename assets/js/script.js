@@ -154,15 +154,123 @@ function createParticles() {
 
 createParticles();
 
-// === MOUSE GLOW EFFECT ===
-const glow = document.createElement('div');
-glow.className = 'mouse-glow';
-document.body.appendChild(glow);
+// === MOUSE GLOW EFFECT - BINARY STREAM (only while moving) ===
+const binaryCanvas = document.createElement('canvas');
+binaryCanvas.style.position = 'fixed';
+binaryCanvas.style.top = '0';
+binaryCanvas.style.left = '0';
+binaryCanvas.style.width = '100%';
+binaryCanvas.style.height = '100%';
+binaryCanvas.style.pointerEvents = 'none';
+binaryCanvas.style.zIndex = '9999';
+binaryCanvas.style.mixBlendMode = 'screen';
+document.body.appendChild(binaryCanvas);
+
+const binCtx = binaryCanvas.getContext('2d');
+let mouseX = -100, mouseY = -100;
+let binaryParticles = [];
+let binaryActive = false;
+let binaryRAF = null;
+let mouseStopTimer = null;
+
+function resizeBinaryCanvas() {
+  binaryCanvas.width = window.innerWidth;
+  binaryCanvas.height = window.innerHeight;
+}
+
+function updateBinaryParticles() {
+  if (!binaryActive) return;
+  const count = 2;
+  for (let i = 0; i < count; i++) {
+    binaryParticles.push({
+      x: mouseX + (Math.random() - 0.5) * 30,
+      y: mouseY + (Math.random() - 0.5) * 30,
+      char: Math.random() > 0.5 ? '1' : '0',
+      size: Math.random() * 10 + 12,
+      alpha: 0.8 + Math.random() * 0.2,
+      life: 1,
+      decay: 0.008 + Math.random() * 0.012,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: -Math.random() * 1.5 - 0.5
+    });
+  }
+  
+  if (binaryParticles.length > 200) {
+    binaryParticles.splice(0, binaryParticles.length - 200);
+  }
+}
+
+function drawBinary() {
+  binCtx.clearRect(0, 0, binaryCanvas.width, binaryCanvas.height);
+  
+  // Always draw remaining particles even when inactive (for smooth fade-out)
+  for (let i = binaryParticles.length - 1; i >= 0; i--) {
+    const p = binaryParticles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life -= p.decay;
+    p.alpha = p.life * 0.8;
+    
+    if (p.life <= 0) {
+      binaryParticles.splice(i, 1);
+      continue;
+    }
+    
+    binCtx.font = `bold ${p.size}px monospace`;
+    binCtx.fillStyle = `rgba(108, 92, 231, ${p.alpha})`;
+    binCtx.shadowColor = 'rgba(108, 92, 231, 0.8)';
+    binCtx.shadowBlur = 15;
+    binCtx.fillText(p.char, p.x, p.y);
+    binCtx.shadowBlur = 0;
+  }
+  
+  // If inactive and all particles are gone, stop the loop
+  if (!binaryActive && binaryParticles.length === 0 && binaryRAF) {
+    cancelAnimationFrame(binaryRAF);
+    binaryRAF = null;
+    binCtx.clearRect(0, 0, binaryCanvas.width, binaryCanvas.height);
+  }
+}
+
+function binaryLoop() {
+  updateBinaryParticles();
+  drawBinary();
+  binaryRAF = requestAnimationFrame(binaryLoop);
+}
+
+function startBinaryEffect() {
+  if (binaryActive) return;
+  binaryActive = true;
+  binaryParticles = [];
+  if (!binaryRAF) {
+    binaryLoop();
+  }
+}
+
+function stopBinaryEffect() {
+  binaryActive = false;
+  // Don't clear particles — let them fade out naturally via the animation loop
+  // The loop will keep running until all particles decay to zero
+}
 
 document.addEventListener('mousemove', (e) => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  
+  // Start effect on first move
+  if (!binaryActive) {
+    startBinaryEffect();
+  }
+  
+  // Reset the stop timer
+  clearTimeout(mouseStopTimer);
+  mouseStopTimer = setTimeout(() => {
+    stopBinaryEffect();
+  }, 300); // Stop 300ms after mouse stops moving
 });
+
+window.addEventListener('resize', resizeBinaryCanvas);
+resizeBinaryCanvas();
 
 // === METEOR TRAIL EFFECT ===
 let lastTrailTime = 0;
