@@ -116,7 +116,7 @@ function drawMatrix() {
     
     // Gradient color: brighter at top, dimmer at bottom
     const brightness = Math.max(0, 1 - (y / matrixCanvas.height));
-    ctx.fillStyle = `rgba(108, 92, 231, ${brightness * 0.5})`;
+    ctx.fillStyle = `rgba(255, 107, 107, ${brightness * 0.5})`;
     ctx.font = '14px monospace';
     ctx.fillText(char, x, y);
     
@@ -217,8 +217,8 @@ function drawBinary() {
     }
     
     binCtx.font = `bold ${p.size}px monospace`;
-    binCtx.fillStyle = `rgba(108, 92, 231, ${p.alpha})`;
-    binCtx.shadowColor = 'rgba(108, 92, 231, 0.8)';
+    binCtx.fillStyle = `rgba(255, 230, 109, ${p.alpha})`;
+    binCtx.shadowColor = 'rgba(255, 107, 107, 0.6)';
     binCtx.shadowBlur = 15;
     binCtx.fillText(p.char, p.x, p.y);
     binCtx.shadowBlur = 0;
@@ -287,7 +287,8 @@ document.addEventListener('mousemove', (e) => {
   trail.className = 'meteor-trail';
   
   const size = Math.random() * 6 + 3;
-  const hue = 260 + Math.random() * 30;
+  const hues = [0, 20, 45, 170];
+  const hue = hues[Math.floor(Math.random() * hues.length)] + Math.random() * 10;
   
   trail.style.width = size + 'px';
   trail.style.height = size + 'px';
@@ -331,7 +332,9 @@ document.addEventListener('click', (e) => {
     spark.style.top = e.clientY + 'px';
     spark.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
     spark.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
-    spark.style.background = `hsl(${260 + Math.random() * 40}, 80%, ${60 + Math.random() * 30}%)`;
+    const sparkHues = [0, 20, 45, 170];
+    const sparkHue = sparkHues[Math.floor(Math.random() * sparkHues.length)] + Math.random() * 10;
+    spark.style.background = `hsl(${sparkHue}, 85%, ${55 + Math.random() * 25}%)`;
     
     document.body.appendChild(spark);
     
@@ -461,3 +464,109 @@ if (greetingElement) {
   
   greetingElement.innerHTML = greeting + ', saya<br><span class="highlight">Muhammad Syaiful</span>';
 }
+
+// === TEXT TRUNCATION WITH READ MORE ===
+function setupTruncation() {
+  // ---- About cards ----
+  document.querySelectorAll('.about-card').forEach(card => {
+    if (card.dataset.truncSetup) return; // prevent duplicate listeners
+    card.dataset.truncSetup = 'true';
+
+    const textElement = card.querySelector('.card-text') || card.querySelector('p');
+    if (!textElement) return;
+
+    if (!textElement.classList.contains('card-text')) {
+      textElement.classList.add('card-text');
+    }
+
+    let readMoreBtn = card.querySelector('.read-more');
+    if (!readMoreBtn) {
+      readMoreBtn = document.createElement('button');
+      readMoreBtn.className = 'read-more';
+      readMoreBtn.type = 'button';
+      textElement.insertAdjacentElement('afterend', readMoreBtn);
+    }
+
+    function updateTrunc() {
+      if (textElement.scrollHeight > textElement.clientHeight + 10) {
+        textElement.classList.add('truncated');
+        readMoreBtn.style.display = 'inline-block';
+        readMoreBtn.textContent = 'Lihat selengkapnya ▾';
+      } else {
+        textElement.classList.remove('truncated');
+        readMoreBtn.style.display = 'none';
+      }
+    }
+    updateTrunc();
+
+    readMoreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = card.classList.contains('expanded');
+      if (isExpanded) {
+        card.classList.remove('expanded');
+        textElement.classList.add('truncated');
+        readMoreBtn.textContent = 'Lihat selengkapnya ▾';
+      } else {
+        card.classList.add('expanded');
+        textElement.classList.remove('truncated');
+        readMoreBtn.textContent = 'Sembunyikan ▴';
+      }
+    });
+  });
+
+  // ---- Project cards ----
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (card.dataset.truncSetup) return;
+    card.dataset.truncSetup = 'true';
+
+    const body = card.querySelector('.project-body');
+    const textElement = body ? body.querySelector('p') : null;
+    if (!textElement || !body) return;
+
+    let readMoreBtn = body.querySelector('.read-more');
+    if (!readMoreBtn) {
+      readMoreBtn = document.createElement('button');
+      readMoreBtn.className = 'read-more';
+      readMoreBtn.type = 'button';
+      textElement.insertAdjacentElement('afterend', readMoreBtn);
+    }
+
+    function updateProjTrunc() {
+      if (textElement.scrollHeight > 60) {
+        textElement.classList.add('truncated');
+        readMoreBtn.style.display = 'inline-block';
+        readMoreBtn.textContent = 'Lihat selengkapnya ▾';
+      } else {
+        textElement.classList.remove('truncated');
+        readMoreBtn.style.display = 'none';
+      }
+    }
+    updateProjTrunc();
+
+    readMoreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = body.classList.contains('expanded');
+      if (isExpanded) {
+        body.classList.remove('expanded');
+        textElement.classList.add('truncated');
+        readMoreBtn.textContent = 'Lihat selengkapnya ▾';
+      } else {
+        body.classList.add('expanded');
+        textElement.classList.remove('truncated');
+        readMoreBtn.textContent = 'Sembunyikan ▴';
+      }
+    });
+  });
+}
+
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+  setupTruncation();
+});
+
+// Re-run after scroll reveal (with duplicate-prevention guard it is safe)
+const originalHandleScrollReveal = handleScrollReveal;
+handleScrollReveal = function() {
+  originalHandleScrollReveal();
+  setTimeout(setupTruncation, 100);
+};
