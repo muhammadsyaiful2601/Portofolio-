@@ -1,0 +1,150 @@
+/* ===== LANYARD CAROUSEL ===== */
+.lanyard-carousel {
+  position: relative;
+  width: 100%;
+  height: 580px;
+}
+
+.lanyard-wrapper {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.2);
+  transform-origin: center;
+}
+
+.lanyard-wrapper canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+/* ===== NAV BUTTONS ===== */
+.lanyard-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 3px solid #000000;
+  background: #FFE66D;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.lanyard-nav:hover {
+  transform: translateY(-50%) translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000000;
+  background: #FF6B6B;
+  color: #ffffff;
+}
+
+.lanyard-nav:active {
+  transform: translateY(-50%) translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.lanyard-nav-prev {
+  left: 8px;
+}
+
+.lanyard-nav-next {
+  right: 8px;
+}
+
+/* ===== DOTS ===== */
+.lanyard-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.lanyard-dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lanyard-dot.active {
+  background: #FF6B6B;
+  transform: scale(1.25);
+}
+
+.lanyard-dot:hover {
+  background: #FFE66D;
+}
+
+/* ===== COUNTER ===== */
+.lanyard-counter {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #FFE66D;
+  color: #000000;
+  border: 3px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  z-index: 10;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .lanyard-carousel {
+    height: 520px;
+  }
+
+  .lanyard-wrapper {
+    transform: scale(1.15);
+  }
+
+  .lanyard-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lanyard-carousel {
+    height: 460px;
+  }
+
+  .lanyard-wrapper {
+    transform: scale(1.05);
+  }
+
+  .lanyard-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .lanyard-dot {
+    width: 12px;
+    height: 12px;
+  }
+}

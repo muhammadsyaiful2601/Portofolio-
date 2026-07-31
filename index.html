@@ -89,11 +89,7 @@
             </div>
           </div>
           <div class="hero-image">
-            <img
-              id="profilePhoto"
-              src="assets/profile/IMG_20250417_160308.jpg"
-              alt="Muhammad Syaiful"
-            />
+            <div id="lanyardMount" aria-label="Kartu profil 3D Muhammad Syaiful"></div>
           </div>
         </div>
       </div>
@@ -267,61 +263,7 @@
           Beberapa proyek yang telah saya kerjakan, dari game hingga alat
           interaktif.
         </p>
-        <div class="projects-grid">
-          <div class="project-card">
-            <img src="assets/website/puzzle.jpg" alt="Game Puzzle" />
-            <div class="project-body">
-              <h3>Game Puzzle Sederhana</h3>
-              <p>
-                Puzzle interaktif yang dapat menyelesaikan dirinya sendiri
-                dengan fitur auto-solve. Dibangun dengan JavaScript murni.
-              </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img
-              src="assets/website/kalkulator ngawur.jpg"
-              alt="Kalkulator Ngawur"
-            />
-            <div class="project-body">
-              <h3>Kalkulator Ngawur</h3>
-              <p>
-                Kalkulator unik dengan jawaban yang selalu tidak terduga dan
-                sentuhan humor di setiap perhitungan.
-              </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="assets/website/Event Kampus.jpg" alt="Event Kampus" />
-            <div class="project-body">
-              <h3>Event Kampus</h3>
-              <p>
-                Website informasi dan dokumentasi acara-acara yang
-                diselenggarakan di lingkungan kampus.
-              </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="assets/website/WebGis.jpg" alt="WebGIS" />
-            <div class="project-body">
-              <h3>WebGIS</h3>
-              <p>
-                Aplikasi Geographic Information System berbasis web untuk
-                visualisasi data spasial dan pemetaan.
-              </p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="assets/website/Jadwal Kampus.jpg" alt="Jadwal Kampus" />
-            <div class="project-body">
-              <h3>Jadwal Kampus</h3>
-              <p>
-                Website untuk melihat dan mengelola jadwal perkuliahan dengan
-                tampilan yang informatif dan mudah digunakan.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div id="projectsMount"></div>
       </div>
     </section>
 
@@ -333,68 +275,7 @@
         <p class="section-subtitle">
           Kumpulan foto dan momen dalam perjalanan saya.
         </p>
-        <div class="gallery-grid">
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211314.jpg"
-              alt="Foto 1"
-              loading="lazy"
-            />
-          </div>
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211317.jpg"
-              alt="Foto 2"
-              loading="lazy"
-            />
-          </div>
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211326.jpg"
-              alt="Foto 3"
-              loading="lazy"
-            />
-          </div>
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211320.jpg"
-              alt="Foto 4"
-              loading="lazy"
-            />
-          </div>
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211323.jpg"
-              alt="Foto 5"
-              loading="lazy"
-            />
-          </div>
-          <div
-            class="gallery-item"
-            onclick="openModal(this.querySelector('img').src)"
-          >
-            <img
-              src="assets/foto perjalanan/IMG_20250502_211326 1.jpg"
-              alt="Foto 6"
-              loading="lazy"
-            />
-          </div>
-        </div>
+        <div id="galleryMount"></div>
       </div>
     </section>
 
@@ -477,5 +358,6 @@
     </button>
 
     <script src="assets/js/script.js"></script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
