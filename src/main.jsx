@@ -6,19 +6,27 @@ import profile2 from '../assets/profile/2.jpeg';
 import profile3 from '../assets/profile/3.jpeg';
 import profile4 from '../assets/profile/4.jpeg';
 import profile5 from '../assets/profile/5.jpeg';
-import CardSwap, { Card } from './CardSwap/CardSwap.jsx';
+import ProjectGallery from './ProjectGallery/ProjectGallery.jsx';
 import puzzleImg from '../assets/website/puzzle.jpg';
 import kalkulatorImg from '../assets/website/kalkulator ngawur.jpg';
 import eventImg from '../assets/website/Event Kampus.jpg';
 import webgisImg from '../assets/website/WebGis.jpg';
 import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
-import InfiniteMenu from './InfiniteMenu/InfiniteMenu.jsx';
-import foto1 from '../assets/foto perjalanan/IMG_20250502_211314.jpg';
-import foto2 from '../assets/foto perjalanan/IMG_20250502_211317.jpg';
-import foto3 from '../assets/foto perjalanan/IMG_20250502_211326.jpg';
-import foto4 from '../assets/foto perjalanan/IMG_20250502_211320.jpg';
-import foto5 from '../assets/foto perjalanan/IMG_20250502_211323.jpg';
-import foto6 from '../assets/foto perjalanan/IMG_20250502_211326 1.jpg';
+import BounceCards from './BounceCards/BounceCards.jsx';
+import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
+import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
+import foto3 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52.jpeg';
+import foto4 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.53 (1).jpeg';
+import foto5 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.53.jpeg';
+import foto6 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.54 (1).jpeg';
+import foto7 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.54 (2).jpeg';
+import foto8 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.54.jpeg';
+import foto9 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.55 (1).jpeg';
+import foto10 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.55.jpeg';
+import foto11 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.56 (1).jpeg';
+import foto12 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.56 (2).jpeg';
+import foto13 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.56.jpeg';
+import foto14 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.57.jpeg';
 import './Lanyard/Lanyard.css';
 
 const profiles = [
@@ -126,57 +134,66 @@ function LanyardCarousel() {
   );
 }
 
+const projectsData = [
+  {
+    id: 'puzzle',
+    title: 'Game Puzzle Sederhana',
+    short: 'Puzzle interaktif dengan fitur auto-solve yang menyelesaikan sendiri.',
+    full: 'Game puzzle interaktif berbasis JavaScript murni. Pemain dapat menggeser keping untuk menyusun gambar, dan tersedia fitur auto-solve yang menyelesaikan puzzle secara otomatis dengan animasi langkah demi langkah. Dilengkapi penghitung langkah, timer, dan beberapa level kesulitan.',
+    image: puzzleImg,
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    accent: '#FF6B6B',
+    demoVideo: null,
+    link: '',
+  },
+  {
+    id: 'kalkulator',
+    title: 'Kalkulator Ngawur',
+    short: 'Kalkulator unik dengan jawaban yang selalu tidak terduga.',
+    full: 'Kalkulator humor dengan jawaban yang selalu tidak terduga dan penuh kejutan. Setiap perhitungan menghasilkan respons lucu dan tidak masuk akal, cocok untuk hiburan sekaligus mempelajari manipulasi DOM dan logika JavaScript dengan cara yang menyenangkan.',
+    image: kalkulatorImg,
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    accent: '#4ECDC4',
+    demoVideo: null,
+    link: '',
+  },
+  {
+    id: 'event',
+    title: 'Event Kampus',
+    short: 'Website informasi dan dokumentasi acara-acara kampus.',
+    full: 'Website informasi dan dokumentasi untuk berbagai acara yang diselenggarakan di lingkungan kampus. Menampilkan jadwal kegiatan, galeri dokumentasi, serta formulir pendaftaran peserta. Dibangun dengan Laravel dan MySQL untuk pengelolaan data yang terstruktur.',
+    image: eventImg,
+    tech: ['Laravel', 'MySQL', 'Bootstrap'],
+    accent: '#FFE66D',
+    demoVideo: null,
+    link: '',
+  },
+  {
+    id: 'webgis',
+    title: 'WebGIS',
+    short: 'Aplikasi Geographic Information System untuk visualisasi data spasial.',
+    full: 'Aplikasi Geographic Information System (GIS) berbasis web untuk visualisasi data spasial dan pemetaan interaktif. Mendukung layer peta, marker lokasi, dan interaksi pengguna untuk eksplorasi data geografis secara real-time melalui browser.',
+    image: webgisImg,
+    tech: ['GIS', 'Leaflet', 'JavaScript'],
+    accent: '#95E1D3',
+    demoVideo: null,
+    link: '',
+  },
+  {
+    id: 'jadwal',
+    title: 'Jadwal Kampus',
+    short: 'Website mengelola jadwal perkuliahan yang informatif.',
+    full: 'Website untuk melihat dan mengelola jadwal perkuliahan dengan tampilan yang informatif dan mudah digunakan. Mendukung pembuatan, pengeditan, dan penandaan jadwal sesuai dengan hari serta jam kuliah, lengkap dengan notifikasi dan sistem autentikasi pengguna.',
+    image: jadwalImg,
+    tech: ['Laravel', 'MySQL', 'Bootstrap'],
+    accent: '#FF6B6B',
+    demoVideo: null,
+    link: '',
+  },
+];
+
 function Projects() {
-  return (
-    <div className="projects-swap-wrapper">
-      <CardSwap
-        width={460}
-        height={340}
-        cardDistance={50}
-        verticalDistance={60}
-        delay={4000}
-        pauseOnHover={true}
-        skewAmount={6}
-        easing="elastic"
-      >
-        <Card>
-          <img className="card-image" src={puzzleImg} alt="Game Puzzle" />
-          <div className="card-body">
-            <h3>Game Puzzle Sederhana</h3>
-            <p>Puzzle interaktif yang dapat menyelesaikan dirinya sendiri dengan fitur auto-solve. Dibangun dengan JavaScript murni.</p>
-          </div>
-        </Card>
-        <Card>
-          <img className="card-image" src={kalkulatorImg} alt="Kalkulator Ngawur" />
-          <div className="card-body">
-            <h3>Kalkulator Ngawur</h3>
-            <p>Kalkulator unik dengan jawaban yang selalu tidak terduga dan sentuhan humor di setiap perhitungan.</p>
-          </div>
-        </Card>
-        <Card>
-          <img className="card-image" src={eventImg} alt="Event Kampus" />
-          <div className="card-body">
-            <h3>Event Kampus</h3>
-            <p>Website informasi dan dokumentasi acara-acara yang diselenggarakan di lingkungan kampus.</p>
-          </div>
-        </Card>
-        <Card>
-          <img className="card-image" src={webgisImg} alt="WebGIS" />
-          <div className="card-body">
-            <h3>WebGIS</h3>
-            <p>Aplikasi Geographic Information System berbasis web untuk visualisasi data spasial dan pemetaan.</p>
-          </div>
-        </Card>
-        <Card>
-          <img className="card-image" src={jadwalImg} alt="Jadwal Kampus" />
-          <div className="card-body">
-            <h3>Jadwal Kampus</h3>
-            <p>Website untuk melihat dan mengelola jadwal perkuliahan dengan tampilan yang informatif dan mudah digunakan.</p>
-          </div>
-        </Card>
-      </CardSwap>
-    </div>
-  );
+  return <ProjectGallery projects={projectsData} />;
 }
 
 const mount = document.getElementById('lanyardMount');
@@ -185,19 +202,36 @@ if (mount) {
   createRoot(mount).render(<LanyardCarousel />);
 }
 
-const galleryItems = [
-  { image: foto1, link: foto1, title: 'Foto 1', description: 'Momen perjalanan yang tak terlupakan' },
-  { image: foto2, link: foto2, title: 'Foto 2', description: 'Dokumentasi petualangan seru' },
-  { image: foto3, link: foto3, title: 'Foto 3', description: 'Kenangan indah di setiap perjalanan' },
-  { image: foto4, link: foto4, title: 'Foto 4', description: 'Setiap foto punya ceritanya sendiri' },
-  { image: foto5, link: foto5, title: 'Foto 5', description: 'Jejak langkah yang penuh makna' },
-  { image: foto6, link: foto6, title: 'Foto 6', description: 'Petualangan yang tak akan terlupakan' },
+const galleryImages = [
+  foto1, foto2, foto3, foto4, foto5, foto6, foto7,
+  foto8, foto9, foto10, foto11, foto12, foto13, foto14
 ];
+
+// Fan lebar: 14 foto disebar simetris di sekitar tengah, dengan rotasi kecil.
+const galleryTransformStyles = galleryImages.map((_, i) => {
+  const center = (galleryImages.length - 1) / 2;
+    const offset = (i - center) * 60;
+  const rot = (i - center) * 2.5;
+  return `rotate(${rot.toFixed(1)}deg) translate(${Math.round(offset)}px)`;
+});
 
 function Gallery() {
   return (
-    <div className="gallery-infinite-wrapper">
-      <InfiniteMenu items={galleryItems} scale={1.5} />
+    <div
+      className="gallery-bounce-wrapper"
+      style={{ position: 'relative', minHeight: 360, marginTop: 40 }}
+    >
+      <BounceCards
+        className="gallery-bounce-cards"
+        images={galleryImages}
+        containerWidth={980}
+        containerHeight={340}
+        animationDelay={1}
+        animationStagger={0.06}
+        easeType="elastic.out(1, 0.5)"
+        transformStyles={galleryTransformStyles}
+        enableHover={false}
+      />
     </div>
   );
 }
