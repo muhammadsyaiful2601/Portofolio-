@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
+
+// Komponen sertifikat me-mount sendiri ke #certificatesMount
+import './Certificates/Certificates.jsx';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Lanyard from './Lanyard/Lanyard.jsx';
 import profile1 from '../assets/profile/1.jpg';
 import profile2 from '../assets/profile/2.jpeg';
@@ -12,7 +16,7 @@ import kalkulatorImg from '../assets/website/kalkulator ngawur.jpg';
 import eventImg from '../assets/website/Event Kampus.jpg';
 import webgisImg from '../assets/website/WebGis.jpg';
 import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
-import BounceCards from './BounceCards/BounceCards.jsx';
+import PhotoGallery from './PhotoGallery/PhotoGallery.jsx';
 import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
 import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
 import foto3 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52.jpeg';
@@ -207,33 +211,8 @@ const galleryImages = [
   foto8, foto9, foto10, foto11, foto12, foto13, foto14
 ];
 
-// Fan lebar: 14 foto disebar simetris di sekitar tengah, dengan rotasi kecil.
-const galleryTransformStyles = galleryImages.map((_, i) => {
-  const center = (galleryImages.length - 1) / 2;
-    const offset = (i - center) * 60;
-  const rot = (i - center) * 2.5;
-  return `rotate(${rot.toFixed(1)}deg) translate(${Math.round(offset)}px)`;
-});
-
 function Gallery() {
-  return (
-    <div
-      className="gallery-bounce-wrapper"
-      style={{ position: 'relative', minHeight: 360, marginTop: 40 }}
-    >
-      <BounceCards
-        className="gallery-bounce-cards"
-        images={galleryImages}
-        containerWidth={980}
-        containerHeight={340}
-        animationDelay={1}
-        animationStagger={0.06}
-        easeType="elastic.out(1, 0.5)"
-        transformStyles={galleryTransformStyles}
-        enableHover={false}
-      />
-    </div>
-  );
+  return <PhotoGallery images={galleryImages} />;
 }
 
 const projectsMount = document.getElementById('projectsMount');
@@ -247,3 +226,4 @@ const galleryMount = document.getElementById('galleryMount');
 if (galleryMount) {
   createRoot(galleryMount).render(<Gallery />);
 }
+

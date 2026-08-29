@@ -38,6 +38,161 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== CERTIFICATES ===== */
+.cert-group {
+  margin-top: 48px;
+}
+
+.cert-group-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--surface);
+  border: 4px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 10px 20px;
+  margin-bottom: 28px;
+}
+
+.cert-group-title i {
+  color: var(--accent);
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 0;
+}
+
+/* Sertifikat: kartu lebar (format landscape dokumen) */
+.cert-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+}
+
+/* Badge: kartu persegi (format badge bulat/persegi) */
+.cert-grid-badges {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.cert-grid-badges .cert-thumb {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-grid-badges .cert-thumb img {
+  object-fit: contain;
+  padding: 24px;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 4px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: all var(--transition);
+  position: relative;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card:hover {
+  transform: translate(-6px, -6px);
+  box-shadow: 12px 12px 0px var(--border);
+}
+
+.cert-thumb {
+  position: relative;
+  border-bottom: 4px solid var(--border);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-hover);
+}
+
+.cert-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.cert-card:hover .cert-thumb img {
+  transform: scale(1.05);
+}
+
+.cert-type {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border: 3px solid var(--border);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cert-body {
+  padding: 20px;
+  background: var(--surface);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cert-body h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.cert-body p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cert-view {
+  margin-top: auto;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  transition: gap var(--transition);
+}
+
+.cert-card:hover .cert-view {
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== BOOTING SPLASH SCREEN ===== */
 #bootScreen {
   position: fixed;
@@ -1145,6 +1300,8 @@ body {
 .contact-card .info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .contact-card .label {
@@ -1162,6 +1319,9 @@ body {
   overflow: hidden;
   transition: max-height 0.3s ease;
   cursor: pointer;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact-card .value.truncated {

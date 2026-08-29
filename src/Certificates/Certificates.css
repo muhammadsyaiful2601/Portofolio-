@@ -1,0 +1,50 @@
+/* ===== CERTIFICATES (Horizontal Carousel) ===== */
+
+.cert-root {
+  margin-top: 40px;
+}
+
+/* Lebar kartu di dalam scroller horizontal — dibuat besar agar
+   selalu ada ruang scroll kiri/kanan dalam container 1000px */
+.cert-card {
+  flex: 0 0 auto;
+  width: 460px;
+  max-width: 82vw;
+  scroll-snap-align: start;
+  transform: none !important;
+}
+
+.cert-card:hover {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 8px 8px 0px var(--border) !important;
+}
+
+/* Sertifikat: thumbnail landscape dokumen */
+.cert-scroller-wide .cert-thumb {
+  aspect-ratio: 4 / 3;
+}
+
+.cert-scroller-wide .cert-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Badge: thumbnail persegi, gambar utuh */
+.cert-scroller-badges .cert-card {
+  width: 540px;
+}
+
+.cert-scroller-badges .cert-thumb {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-scroller-badges .cert-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 28px;
+}
