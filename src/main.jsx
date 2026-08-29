@@ -31,6 +31,24 @@ import foto11 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29
 import foto12 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.56 (2).jpeg';
 import foto13 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.56.jpeg';
 import foto14 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.57.jpeg';
+import foto15 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.45 (1).jpeg';
+import foto16 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.45.jpeg';
+import foto17 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.46 (1).jpeg';
+import foto18 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.46 (2).jpeg';
+import foto19 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.46.jpeg';
+import foto20 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.47.jpeg';
+import foto21 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.57.jpeg';
+import foto22 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.42.57.jpeg';
+import foto23 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.42.59.jpeg';
+import foto24 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.00.jpeg';
+import foto25 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.01 (1).jpeg';
+import foto26 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.01.jpeg';
+import foto27 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.02 (1).jpeg';
+import foto28 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.02 (2).jpeg';
+import foto29 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.02.jpeg';
+import foto30 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.03 (1).jpeg';
+import foto31 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.03.jpeg';
+import foto32 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.04.jpeg';
 import './Lanyard/Lanyard.css';
 
 const profiles = [
@@ -208,7 +226,10 @@ if (mount) {
 
 const galleryImages = [
   foto1, foto2, foto3, foto4, foto5, foto6, foto7,
-  foto8, foto9, foto10, foto11, foto12, foto13, foto14
+  foto8, foto9, foto10, foto11, foto12, foto13, foto14,
+  foto15, foto16, foto17, foto18, foto19, foto20, foto21,
+  foto22, foto23, foto24, foto25, foto26, foto27, foto28,
+  foto29, foto30, foto31, foto32
 ];
 
 function Gallery() {
