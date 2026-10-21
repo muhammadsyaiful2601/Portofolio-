@@ -214,6 +214,7 @@ export default function ProjectGallery({ projects }) {
 function renderMedia(project) {
   const src = project.demoVideo;
   const isYoutube = src && /(youtube\.com|youtu\.be)/.test(src);
+  const isGDrive = src && /(drive\.google\.com)/.test(src);
 
   if (src) {
     if (isYoutube) {
@@ -225,6 +226,19 @@ function renderMedia(project) {
           title={project.title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      );
+    }
+    if (isGDrive) {
+      const match = src.match(/[-\w]{25,}/);
+      const fileId = match ? match[0] : src;
+      return (
+        <iframe
+          className="pg-video"
+          src={`https://drive.google.com/file/d/${fileId}/preview`}
+          title={project.title}
+          frameBorder="0"
           allowFullScreen
         />
       );

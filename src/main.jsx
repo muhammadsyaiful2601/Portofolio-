@@ -12,14 +12,10 @@ import profile4 from '../assets/profile/4.jpeg';
 import profile5 from '../assets/profile/5.jpeg';
 import ProjectGallery from './ProjectGallery/ProjectGallery.jsx';
 import eventImg from '../assets/website/Event Kampus.jpg';
-import eventVideo from '../assets/video/event-kampus.mp4';
 import webgisImg from '../assets/website/WebGis.jpg';
-import webgisVideo from '../assets/video/webgis.mp4';
 import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
-import jadwalVideo from '../assets/video/jadwal kuliah.mp4';
 import peminjamanImg from '../assets/website/peminjaman.png';
 import sppImg from '../assets/website/spp.png';
-import sppVideo from '../assets/video/spp.mp4';
 import PhotoGallery from './PhotoGallery/PhotoGallery.jsx';
 import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
 import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
@@ -169,7 +165,7 @@ const projectsData = [
     image: eventImg,
     tech: ['Laravel', 'MySQL', 'Bootstrap'],
     accent: '#FFE66D',
-    demoVideo: eventVideo,
+    demoVideo: 'https://drive.google.com/file/d/1tIxrnhTmz3hnrlm1Zp1PApH4RcQVGKyL/view?usp=sharing',
     link: '',
   },
   {
@@ -180,7 +176,7 @@ const projectsData = [
     image: webgisImg,
     tech: ['GIS', 'Leaflet', 'JavaScript'],
     accent: '#95E1D3',
-    demoVideo: webgisVideo,
+    demoVideo: 'https://drive.google.com/file/d/1Jr26q01WYCpyrEKkw--jckPSi2x4tHw0/view?usp=drive_link',
     link: '',
   },
   {
@@ -191,7 +187,7 @@ const projectsData = [
     image: jadwalImg,
     tech: ['Laravel', 'MySQL', 'Bootstrap'],
     accent: '#FF6B6B',
-    demoVideo: jadwalVideo,
+    demoVideo: 'https://drive.google.com/file/d/1BPjJ3PHxQZXj627cGh2m9kN3htvrkDrx/view?usp=sharing',
     link: '',
   },
   {
@@ -213,7 +209,7 @@ const projectsData = [
     image: sppImg,
     tech: ['React', 'Laravel'],
     accent: '#95E1D3',
-    demoVideo: sppVideo,
+    demoVideo: 'https://drive.google.com/file/d/1Jr26q01WYCpyrEKkw--jckPSi2x4tHw0/view?usp=drive_link',
     link: '',
   },
 ];
