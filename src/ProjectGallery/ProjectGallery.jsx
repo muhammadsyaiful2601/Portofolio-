@@ -128,9 +128,25 @@ export default function ProjectGallery({ projects }) {
                   <button type="button" className="pg-btn pg-btn-detail" onClick={() => openDetail(p)}>
                     <i className="fas fa-info-circle" /> Detail
                   </button>
-                  <button type="button" className="pg-btn pg-btn-video" onClick={() => openVideo(p)}>
-                    <i className="fas fa-play" /> Demo Video
-                  </button>
+                  {p.link ? (
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="pg-btn pg-btn-video"
+                      onClick={() => setActive(null)}
+                    >
+                      <i className="fas fa-external-link-alt" /> Kunjungi Proyek
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className="pg-btn pg-btn-video"
+                      onClick={() => openVideo(p)}
+                    >
+                      <i className="fas fa-play" /> Demo Video
+                    </button>
+                  )}
                 </div>
               </div>
             </article>
@@ -177,6 +193,11 @@ export default function ProjectGallery({ projects }) {
                   href={active.link}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(active.link, '_blank');
+                    setActive(null);
+                  }}
                 >
                   <i className="fas fa-external-link-alt" /> Kunjungi Proyek
                 </a>
@@ -208,7 +229,7 @@ function renderMedia(project) {
         />
       );
     }
-    return <video className="pg-video" src={src} controls poster={project.image} />;
+    return <video className="pg-video" src={src} controls preload="none" poster={project.image} />;
   }
 
   return (
@@ -216,10 +237,21 @@ function renderMedia(project) {
       <img src={project.image} alt={project.title} />
       <div className="pg-video-overlay">
         <div className="pg-video-icon">
-          <i className="fas fa-film" />
+          <i className="fas fa-external-link-alt" />
         </div>
-        <strong>Video Demo Segera Hadir</strong>
-        <span>Video demo {project.title} akan segera ditambahkan.</span>
+        {project.link ? (
+          <>
+            <strong>Video Demo Segera Hadir</strong>
+            <span>
+              Video demo {project.title} ada di dalam tombol <strong>Kunjungi Proyek</strong> di bawah.
+            </span>
+          </>
+        ) : (
+          <>
+            <strong>Video Demo Segera Hadir</strong>
+            <span>Video demo {project.title} akan segera ditambahkan.</span>
+          </>
+        )}
       </div>
     </div>
   );

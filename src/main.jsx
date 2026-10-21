@@ -11,11 +11,15 @@ import profile3 from '../assets/profile/3.jpeg';
 import profile4 from '../assets/profile/4.jpeg';
 import profile5 from '../assets/profile/5.jpeg';
 import ProjectGallery from './ProjectGallery/ProjectGallery.jsx';
-import puzzleImg from '../assets/website/puzzle.jpg';
-import kalkulatorImg from '../assets/website/kalkulator ngawur.jpg';
 import eventImg from '../assets/website/Event Kampus.jpg';
+import eventVideo from '../assets/video/event-kampus.mp4';
 import webgisImg from '../assets/website/WebGis.jpg';
+import webgisVideo from '../assets/video/webgis.mp4';
 import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
+import jadwalVideo from '../assets/video/jadwal kuliah.mp4';
+import peminjamanImg from '../assets/website/peminjaman.png';
+import sppImg from '../assets/website/spp.png';
+import sppVideo from '../assets/video/spp.mp4';
 import PhotoGallery from './PhotoGallery/PhotoGallery.jsx';
 import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
 import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
@@ -158,28 +162,6 @@ function LanyardCarousel() {
 
 const projectsData = [
   {
-    id: 'puzzle',
-    title: 'Game Puzzle Sederhana',
-    short: 'Puzzle interaktif dengan fitur auto-solve yang menyelesaikan sendiri.',
-    full: 'Game puzzle interaktif berbasis JavaScript murni. Pemain dapat menggeser keping untuk menyusun gambar, dan tersedia fitur auto-solve yang menyelesaikan puzzle secara otomatis dengan animasi langkah demi langkah. Dilengkapi penghitung langkah, timer, dan beberapa level kesulitan.',
-    image: puzzleImg,
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    accent: '#FF6B6B',
-    demoVideo: null,
-    link: '',
-  },
-  {
-    id: 'kalkulator',
-    title: 'Kalkulator Ngawur',
-    short: 'Kalkulator unik dengan jawaban yang selalu tidak terduga.',
-    full: 'Kalkulator humor dengan jawaban yang selalu tidak terduga dan penuh kejutan. Setiap perhitungan menghasilkan respons lucu dan tidak masuk akal, cocok untuk hiburan sekaligus mempelajari manipulasi DOM dan logika JavaScript dengan cara yang menyenangkan.',
-    image: kalkulatorImg,
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    accent: '#4ECDC4',
-    demoVideo: null,
-    link: '',
-  },
-  {
     id: 'event',
     title: 'Event Kampus',
     short: 'Website informasi dan dokumentasi acara-acara kampus.',
@@ -187,7 +169,7 @@ const projectsData = [
     image: eventImg,
     tech: ['Laravel', 'MySQL', 'Bootstrap'],
     accent: '#FFE66D',
-    demoVideo: null,
+    demoVideo: eventVideo,
     link: '',
   },
   {
@@ -198,7 +180,7 @@ const projectsData = [
     image: webgisImg,
     tech: ['GIS', 'Leaflet', 'JavaScript'],
     accent: '#95E1D3',
-    demoVideo: null,
+    demoVideo: webgisVideo,
     link: '',
   },
   {
@@ -209,7 +191,29 @@ const projectsData = [
     image: jadwalImg,
     tech: ['Laravel', 'MySQL', 'Bootstrap'],
     accent: '#FF6B6B',
+    demoVideo: jadwalVideo,
+    link: '',
+  },
+  {
+    id: 'peminjaman',
+    title: 'Sistem Peminjaman PNP',
+    short: 'Aplikasi peminjaman ruangan dan barang kampus.',
+    full: 'Sistem informasi peminjaman ruangan dan barang di lingkungan kampus Politeknik Negeri Padang. Dibangun dengan React di frontend, Laravel di backend, dan Electron untuk versi desktop aplikasi. Pengguna dapat mengajukan peminjaman, melihat status, serta mengelola data inventaris barang dan jadwal ruangan.',
+    image: peminjamanImg,
+    tech: ['React', 'Laravel', 'Electron'],
+    accent: '#95E1D3',
     demoVideo: null,
+    link: 'https://peminjamanpnp.netlify.app/',
+  },
+  {
+    id: 'spp',
+    title: 'Pencatatan SPP',
+    short: 'Sistem pencatatan SPP (Sumbangan Pendidikan) siswa.',
+    full: 'Sistem pencatatan dan manajemen SPP (Sumbangan Pendidikan) untuk siswa kampus. Dibangun dengan React di frontend dan Laravel di backend. Memungkinkan pencatatan pembayaran, pelaporan keuangan, dan manajemen data siswa secara terstruktur.',
+    image: sppImg,
+    tech: ['React', 'Laravel'],
+    accent: '#95E1D3',
+    demoVideo: sppVideo,
     link: '',
   },
 ];

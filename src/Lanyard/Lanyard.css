@@ -118,13 +118,28 @@
   }
 
   .lanyard-wrapper {
-    transform: scale(1.15);
+    transform: scale(0.95);
   }
 
   .lanyard-nav {
     width: 40px;
     height: 40px;
     font-size: 1rem;
+  }
+
+  .lanyard-nav-prev {
+    left: 8px;
+  }
+
+  .lanyard-nav-next {
+    right: 8px;
+  }
+
+  .lanyard-counter {
+    top: 16px;
+    right: 16px;
+    font-size: 0.85rem;
+    padding: 4px 12px;
   }
 }
 
@@ -134,7 +149,7 @@
   }
 
   .lanyard-wrapper {
-    transform: scale(1.05);
+    transform: scale(0.85);
   }
 
   .lanyard-nav {
@@ -143,8 +158,23 @@
     font-size: 0.9rem;
   }
 
+  .lanyard-nav-prev {
+    left: 8px;
+  }
+
+  .lanyard-nav-next {
+    right: 8px;
+  }
+
   .lanyard-dot {
     width: 12px;
     height: 12px;
+  }
+
+  .lanyard-counter {
+    top: 12px;
+    right: 12px;
+    font-size: 0.75rem;
+    padding: 3px 8px;
   }
 }

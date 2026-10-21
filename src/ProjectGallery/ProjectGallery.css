@@ -399,17 +399,30 @@
 @media (max-width: 768px) {
   .pg-card { width: 300px; }
   .pg-arrow { width: 44px; height: 44px; }
-  .pg-arrow-left { left: -4px; }
-  .pg-arrow-right { right: -4px; }
-  .pg-video { height: 280px; }
-  .pg-video-placeholder > img { height: 280px; }
-  .pg-scroller { padding: 8px 2px 16px; }
+  .pg-arrow-left { left: 10px; }
+  .pg-arrow-right { right: 10px; }
+  .pg-video { height: 240px; }
+  .pg-video-placeholder > img { height: 240px; }
+  .pg-scroller { padding: 8px 56px 20px; }
+  .pg-modal { padding: 20px; }
+  .pg-modal-title { font-size: 1.4rem; margin-bottom: 8px; }
+  .pg-modal-desc { font-size: 0.9rem; line-height: 1.5; }
 }
 
 @media (max-width: 480px) {
+  .pg-arrow { width: 40px; height: 40px; }
+  .pg-arrow-left { left: 8px; }
+  .pg-arrow-right { right: 8px; }
   .pg-actions { flex-direction: column; }
-  .pg-modal-inner { max-height: 94vh; }
-  .pg-video { height: 220px; }
-  .pg-video-placeholder > img { height: 220px; }
+  .pg-modal { padding: 14px; }
+  .pg-modal-inner { max-height: 86vh; }
+  .pg-modal-title { font-size: 1.25rem; margin-bottom: 8px; }
+  .pg-modal-desc { font-size: 0.85rem; line-height: 1.5; }
+  .pg-video { height: 160px; }
+  .pg-video-placeholder > img { height: 160px; }
+  .pg-scroller { padding: 8px 52px 20px; }
+  .pg-video-overlay { padding: 14px; }
+  .pg-video-overlay strong { font-size: 1.1rem; }
+  .pg-video-overlay span { font-size: 0.8rem; max-width: 260px; }
 }
 

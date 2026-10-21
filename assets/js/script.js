@@ -162,8 +162,8 @@ document.querySelectorAll('.about-card, .project-card, .skill-item, .contact-car
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 15;
-    const rotateY = (centerX - x) / 15;
+    const rotateX = (centerY - y) / 15;
+    const rotateY = (x - centerX) / 15;
     
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
   });

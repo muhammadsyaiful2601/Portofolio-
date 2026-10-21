@@ -52,19 +52,32 @@ export default function PhotoGallery({ images }) {
     touchStartX.current = null;
   };
 
+  const handleView = (e, i) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveIndex(i);
+  };
+
   return (
     <div className="photo-gallery">
       <div className="ph-grid">
         {images.map((src, i) => (
-          <button
+          <div
             key={i}
-            type="button"
             className="ph-item"
             onClick={() => setActiveIndex(i)}
             aria-label={`Lihat foto ${i + 1}`}
           >
             <img src={src} alt={`Foto ${i + 1}`} loading="lazy" draggable="false" />
-          </button>
+            <a
+              href={src}
+              className="ph-download-btn"
+              onClick={(e) => handleView(e, i)}
+              aria-label={`Lihat foto ${i + 1} dalam popup`}
+            >
+              <i className="fas fa-image" /> Lihat Dokumentasi
+            </a>
+          </div>
         ))}
       </div>
 
