@@ -239,7 +239,10 @@ function renderMedia(project) {
           src={`https://drive.google.com/file/d/${fileId}/preview`}
           title={project.title}
           frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
           allowFullScreen
+          webkitallowfullscreen
+          mozallowfullscreen
         />
       );
     }
