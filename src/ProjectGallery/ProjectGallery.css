@@ -313,7 +313,9 @@
 /* ===== VIDEO ===== */
 .pg-video {
   width: 100%;
-  height: 440px;
+  max-height: 55vh;
+  height: auto;
+  aspect-ratio: 16 / 9;
   display: block;
   object-fit: cover;
   border: none;
@@ -323,11 +325,13 @@
   position: relative;
   overflow: hidden;
   background: #111111;
+  aspect-ratio: 16 / 9;
+  max-height: 55vh;
 }
 
 .pg-video-placeholder > img {
   width: 100%;
-  height: 440px;
+  height: 100%;
   object-fit: cover;
   opacity: 0.35;
   display: block;
@@ -401,8 +405,9 @@
   .pg-arrow { width: 44px; height: 44px; }
   .pg-arrow-left { left: 10px; }
   .pg-arrow-right { right: 10px; }
-  .pg-video { height: 240px; }
-  .pg-video-placeholder > img { height: 240px; }
+  .pg-video { max-height: 40vh; height: auto; aspect-ratio: 16 / 9; }
+  .pg-video-placeholder { aspect-ratio: 16 / 9; max-height: 40vh; }
+  .pg-video-placeholder > img { width: 100%; height: 100%; object-fit: cover; }
   .pg-scroller { padding: 8px 56px 20px; }
   .pg-modal { padding: 20px; }
   .pg-modal-title { font-size: 1.4rem; margin-bottom: 8px; }
@@ -418,8 +423,9 @@
   .pg-modal-inner { max-height: 86vh; }
   .pg-modal-title { font-size: 1.25rem; margin-bottom: 8px; }
   .pg-modal-desc { font-size: 0.85rem; line-height: 1.5; }
-  .pg-video { height: 160px; }
-  .pg-video-placeholder > img { height: 160px; }
+  .pg-video { max-height: 35vh; height: auto; aspect-ratio: 16 / 9; }
+  .pg-video-placeholder { aspect-ratio: 16 / 9; max-height: 35vh; }
+  .pg-video-placeholder > img { width: 100%; height: 100%; object-fit: cover; }
   .pg-scroller { padding: 8px 52px 20px; }
   .pg-video-overlay { padding: 14px; }
   .pg-video-overlay strong { font-size: 1.1rem; }
