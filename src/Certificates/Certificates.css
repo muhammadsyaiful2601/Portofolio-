@@ -12,10 +12,14 @@
   max-width: 82vw;
   scroll-snap-align: start;
   transform: none !important;
+  /* Naikkan ke compositor layer agar transform hover tidak trigger repaint layout */
+  will-change: transform;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 .cert-card:hover {
-  transform: translate(-3px, -3px) !important;
+  transform: translate(-3px, -3px) translateZ(0) !important;
   box-shadow: 8px 8px 0px var(--border) !important;
 }
 

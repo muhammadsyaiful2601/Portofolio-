@@ -1,3 +1,99 @@
+// === PRELOAD ASSET AWAL ============================
+// Semua resource yang ingin diunduh ke cache sebelum boot screen hilang
+const PRELOAD_ASSETS = [
+  // Profil (hero + about)
+  'assets/profile/1.jpg',
+  'assets/profile/2.jpeg',
+  'assets/profile/3.jpeg',
+  'assets/profile/4.jpeg',
+  'assets/profile/5.jpeg',
+  // Sertifikat
+  'assets/sertifikat/sertifikat-panitia.png',
+  'assets/sertifikat/huawei-sertificat.jpeg',
+  'assets/sertifikat/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260829-20-271znt-1.png',
+  'assets/sertifikat/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260829-20-w9qs07-1.png',
+  // Website / project preview
+  'assets/website/Event Kampus.jpg',
+  'assets/website/WebGis.jpg',
+  'assets/website/Jadwal Kampus.jpg',
+  'assets/website/peminjaman.png',
+  'assets/website/spp.png',
+  // Model 3D Lanyard
+  'assets/lanyard/card.glb',
+  // Foto perjalanan (galeri) — ambil beberapa representatif agar boot tidak terlalu lama
+  'assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg',
+  'assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.45.jpeg',
+  'assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.02.jpeg'
+];
+
+let assetsLoaded = 0;
+const assetsTotal = PRELOAD_ASSETS.length;
+const bootProgress = document.querySelector('.boot-progress');
+const bootStatus = document.querySelector('.boot-status');
+let preloadDone = false;
+let minTimeReached = false;
+const MIN_BOOT_TIME = 1500; // minimal boot screen tampil 1,5 detik agar tidak kaget
+
+// Kunci scroll saat boot screen aktif
+document.body.classList.add('boot-active');
+
+function updateBootProgress() {
+  const pct = Math.round((assetsLoaded / assetsTotal) * 100);
+  if (bootProgress) bootProgress.style.width = pct + '%';
+  if (bootStatus) bootStatus.textContent = `Memuat aset... ${pct}%`;
+}
+
+function preloadAsset(src) {
+  return new Promise((resolve, reject) => {
+    // Gunakan Image untuk gambar, fetch untuk non-image (glb)
+    const isImage = /\.(jpe?g|png|webp|avif|gif)$/i.test(src);
+    if (isImage) {
+      const img = new Image();
+      img.onload = () => resolve(src);
+      img.onerror = () => resolve(src); // gagal tidak menghentikan boot
+      img.src = src;
+    } else {
+      fetch(src)
+        .then(() => resolve(src))
+        .catch(() => resolve(src));
+    }
+  });
+}
+
+async function runPreloader() {
+  // Jalankan semua preload secara paralel
+  await Promise.all(PRELOAD_ASSETS.map((src, i) => {
+    return preloadAsset(src).then(() => {
+      assetsLoaded = i + 1;
+      updateBootProgress();
+    });
+  }));
+
+  preloadDone = true;
+  checkBootComplete();
+}
+
+// Pastikan boot screen tidak hilang terlalu cepat
+setTimeout(() => { minTimeReached = true; checkBootComplete(); }, MIN_BOOT_TIME);
+
+function checkBootComplete() {
+  if (preloadDone && minTimeReached) {
+    const bootScreen = document.getElementById('bootScreen');
+    if (bootScreen) {
+      bootScreen.style.opacity = '0';
+      setTimeout(() => {
+        bootScreen.style.display = 'none';
+        document.body.classList.remove('boot-active');
+        document.body.style.overflow = '';
+      }, 400);
+    }
+    window.dispatchEvent(new CustomEvent('portfolioReady'));
+  }
+}
+
+// Jalankan preloader segera
+runPreloader();
+
 // === Mobile Menu Toggle ===
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -12,16 +108,23 @@ function closeMobileMenu() {
   mobileMenu.classList.remove('open');
 }
 
-// === Scroll to Top Button ===
+// === Scroll to Top Button (throttled) ===
 const scrollBtn = document.getElementById('scrollTop');
+let scrollTicking = false;
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollBtn.style.display = 'flex';
-  } else {
-    scrollBtn.style.display = 'none';
+  if (!scrollTicking) {
+    window.requestAnimationFrame(() => {
+      if (window.scrollY > 300) {
+        scrollBtn.style.display = 'flex';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+      scrollTicking = false;
+    });
+    scrollTicking = true;
   }
-});
+}, { passive: true });
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -127,9 +230,35 @@ function drawMatrix() {
   }
 }
 
+let matrixLastTime = 0;
+const matrixInterval = 1000 / 24; // ~24 FPS, cukup halus tapi hemat GPU
+let matrixRunning = true;
+
+function animateMatrix(timestamp) {
+  if (!matrixRunning) {
+    if (document.visibilityState === 'visible') matrixRunning = true;
+    return;
+  }
+  const delta = timestamp - matrixLastTime;
+  if (delta >= matrixInterval) {
+    drawMatrix();
+    matrixLastTime = timestamp;
+  }
+  requestAnimationFrame(animateMatrix);
+}
+
 window.addEventListener('resize', resizeMatrixCanvas);
 resizeMatrixCanvas();
-setInterval(drawMatrix, 50);
+requestAnimationFrame(animateMatrix);
+
+// Hentikan animasi matrix saat tab tidak aktif (hemat baterai/CPU)
+document.addEventListener('visibilitychange', () => {
+  matrixRunning = document.visibilityState === 'visible';
+  if (matrixRunning) {
+    matrixLastTime = 0;
+    requestAnimationFrame(animateMatrix);
+  }
+});
 
 // === FLOATING PARTICLES ===
 function createParticles() {

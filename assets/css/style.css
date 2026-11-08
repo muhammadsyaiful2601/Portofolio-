@@ -96,7 +96,7 @@ body {
   border: 4px solid var(--border);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
   position: relative;
   padding: 0;
   text-align: left;
@@ -105,10 +105,13 @@ body {
   color: inherit;
   display: flex;
   flex-direction: column;
+  will-change: transform;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 .cert-card:hover {
-  transform: translate(-6px, -6px);
+  transform: translate(-6px, -6px) translateZ(0);
   box-shadow: 12px 12px 0px var(--border);
 }
 
@@ -202,14 +205,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: boot-fade-out 0.8s ease 3.5s forwards;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes boot-fade-out {
-  to {
-    opacity: 0;
-    pointer-events: none;
-  }
+/* Sembunyikan scroll body saat boot screen aktif */
+body.boot-active {
+  overflow: hidden;
 }
 
 .boot-content {
@@ -274,18 +275,8 @@ body {
   width: 0%;
   background: var(--accent);
   border-radius: 0px;
-  animation: boot-progress 2.5s ease-in-out forwards;
+  transition: width 0.2s ease;
   box-shadow: 0 0 10px var(--accent);
-}
-
-@keyframes boot-progress {
-  0% { width: 0%; }
-  20% { width: 15%; }
-  40% { width: 35%; }
-  60% { width: 55%; }
-  80% { width: 80%; }
-  90% { width: 92%; }
-  100% { width: 100%; }
 }
 
 .boot-status {
@@ -1499,6 +1490,34 @@ body.keyboard-nav button:focus {
   outline-offset: 4px;
 }
 
+/* ===== PERFORMANCE OPTIMIZATION ===== */
+
+/* Gambar di luar layar tidak di-render sampai muncul (hemat memori/GPU) */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px 150px;
+  decoding: async;
+}
+
+/* Elemen yang di-animate / di-hover: naikkan ke compositor layer agar tidak repaint layout */
+.will-change-transform,
+.btn,
+.project-card,
+.cert-card,
+.contact-card,
+.about-card,
+#scrollTop {
+  will-change: transform;
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+/* Matrix rain: jangan gambar terlalu cepat pada perangkat rendah */
+#matrixCanvas {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .nav-links { display: none; }
@@ -1560,4 +1579,24 @@ body.keyboard-nav button:focus {
   .contact-card { min-width: 100%; }
   .gallery-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== ABOUT HALFTONE (foto interaktif cursor) ===== */
+/* TANPA bingkai/shadow — cutout menyatu dengan halaman (lebih misterius) */
+#aboutHalftoneMount {
+  width: 100%;
+  max-width: 480px;
+  margin: 4px auto 32px;
+  aspect-ratio: 612 / 408;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+  background: transparent;
+  cursor: crosshair;
+}
+
+@media (max-width: 640px) {
+  #aboutHalftoneMount {
+    max-width: 100%;
+  }
 }

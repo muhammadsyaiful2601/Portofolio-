@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import certAwsFoundations from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260829-20-271znt-1.png';
 import certAwsArchitecting from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260829-20-w9qs07-1.png';
 import certHuawei from '../../assets/sertifikat/huawei-sertificat.jpeg';
+import certPanitia from '../../assets/sertifikat/sertifikat-panitia.png';
 import badgeAwsFoundations from '../../assets/badge/aws-academy-graduate-cloud-foundations-training-bad.png';
 import badgeAwsArchitecting from '../../assets/badge/aws-academy-graduate-cloud-architecting-training-ba.png';
 import './Certificates.css';
@@ -31,6 +32,14 @@ const certificatesData = [
     type: 'Sertifikat',
     image: certHuawei,
     accent: 'var(--accent-4)',
+  },
+  {
+    id: 'sertifikat-panitia',
+    title: 'Sertifikat Panitia',
+    issuer: 'Acara Kampus',
+    type: 'Sertifikat',
+    image: certPanitia,
+    accent: 'var(--accent-3)',
   },
 ];
 
@@ -160,7 +169,7 @@ function CertCarousel({ title, icon, data, modifier }) {
               aria-label={`Lihat ${c.title}`}
             >
               <div className="cert-thumb">
-                <img src={c.image} alt={c.title} loading="lazy" draggable="false" />
+                <img src={c.image} alt={c.title} loading="lazy" decoding="async" width="460" height="345" draggable="false" />
                 <span className="cert-type" style={{ background: c.accent }}>
                   {c.type}
                 </span>

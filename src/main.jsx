@@ -17,6 +17,9 @@ import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
 import peminjamanImg from '../assets/website/peminjaman.png';
 import sppImg from '../assets/website/spp.png';
 import PhotoGallery from './PhotoGallery/PhotoGallery.jsx';
+import DitherVeil from './DitherVeil/DitherVeil.jsx';
+import fotoAtas from '../assets/foto di bagian siapa saya/foto di atas.png';
+import fotoCursor from '../assets/foto di bagian siapa saya/foto ketika cursor.png';
 import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
 import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
 import foto3 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52.jpeg';
@@ -247,4 +250,35 @@ const galleryMount = document.getElementById('galleryMount');
 if (galleryMount) {
   createRoot(galleryMount).render(<Gallery />);
 }
+
+// Foto interaktif "Siapa Saya?": foto utama dicetak dither (gaya cetak),
+// di bawah cursor tampak foto penyamaran full-color hanya di area kursor
+function AboutDitherVeil() {
+  return (
+    <DitherVeil
+      src={fotoAtas}
+      revealSrc={fotoCursor}
+      pattern="floyd"
+      pixelSize={1}
+      palette="rgb"
+      levels={16}
+      inkColor="#141414"
+      paperColor="#FFFEF0"
+      revealRadius={150}
+      softness={0.6}
+      linger={1}
+      brightness={0.1}
+      contrast={1}
+      clickBurst
+    />
+  );
+}
+
+const aboutHalftoneMount = document.getElementById('aboutHalftoneMount');
+
+if (aboutHalftoneMount) {
+  createRoot(aboutHalftoneMount).render(<AboutDitherVeil />);
+}
+
+
 

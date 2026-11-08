@@ -39,18 +39,16 @@ export default function Lanyard({
       <Canvas
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent, antialias: true }}
+        gl={{ alpha: transparent, antialias: true, preserveDrawingBuffer: false }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60} allowSleep>
           <Band isMobile={isMobile} frontImage={frontImage} backImage={backImage} imageFit={imageFit} lanyardImage={lanyardImage} lanyardWidth={lanyardWidth} />
         </Physics>
-        <Environment blur={0.75}>
+        <Environment blur={0.25} backgroundColor="#FFFEF0">
           <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-          <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-          <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-          <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
+          <Lightformer intensity={1.5} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
         </Environment>
       </Canvas>
     </div>
@@ -68,6 +66,7 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
   const dir = new THREE.Vector3();
+  const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]);
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
   const { nodes, materials } = useGLTF(cardGLB);
   const texture = useTexture(lanyardImage || lanyard);
@@ -111,7 +110,6 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
     return composite;
   }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base.map]);
 
-  const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
@@ -120,11 +118,16 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
   useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.5, 0]]);
 
+  // Cleanup cursor style saat unmount
   useEffect(() => {
     document.body.style.cursor = hovered ? (dragged ? 'grabbing' : 'grab') : 'auto';
-    return () => { document.body.style.cursor = 'auto'; };
+    return () => {
+      document.body.style.cursor = 'auto';
+    };
   }, [hovered, dragged]);
 
+  // Tali selalu di-update setiap frame agar posisi selalu pas dengan joint fisika
+  const needsAnimation = dragged || hovered;
   useFrame((state, delta) => {
     if (dragged) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
@@ -133,7 +136,7 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
       card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
     }
-    if (fixed.current) {
+    if (fixed.current && band.current) {
       [j1, j2].forEach(ref => {
         if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
         const distance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
@@ -144,6 +147,8 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
       band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      band.current.geometry.needsUpdate = true;
+      if (!needsAnimation && !dragged) return;
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
@@ -152,6 +157,18 @@ function Band({ isMobile, frontImage, backImage, imageFit, lanyardImage, lanyard
 
   curve.curveType = 'chordal';
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+
+  // Dispose texture & geometry saat component unmount (mencegah memory leak & glitch saat pindah section)
+  useEffect(() => {
+    return () => {
+      texture.dispose();
+      frontTex.dispose();
+      backTex.dispose();
+      if (band.current) {
+        band.current.geometry.dispose();
+      }
+    };
+  }, []);
 
   return (
     <>

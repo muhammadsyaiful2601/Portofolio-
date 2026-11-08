@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swarm Rebuild Demo — Portofolio Muhammad Syaiful</title>
+    <meta
+      name="description"
+      content="Demo efek visual Swarm Rebuild: rekonstruksi halaman portofolio animasi oleh kursor-kursor swarm di atas HTML5 Canvas."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐝</text></svg>"
+    />
+    <link rel="stylesheet" href="./swarm-rebuild.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Muhammad<span>Syaiful</span></a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#certificates">Sertifikat</a></li>
+            <li><a href="#contact">Kontak</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero" id="about">
+      <div class="hero-inner">
+        <img class="hero-photo" src="../assets/profile/1.jpg" alt="Foto Muhammad Syaiful" />
+        <span class="section-label">Tersedia untuk berkolaborasi</span>
+        <h1>Selamat Pagi, saya <span>Muhammad Syaiful</span></h1>
+        <p class="lead">
+          Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, desain, dan
+          teknologi kreatif.
+        </p>
+        <div>
+          <button class="cta" id="triggerSwarm" type="button">
+            Lihat Proyek — Swarm Rebuild <span aria-hidden="true">▶</span>
+          </button>
+        </div>
+        <p class="shortcut">Shortcut: Ctrl + Shift + R (trigger / cancel) · Esc untuk cancel</p>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <span class="section-label">Proyek</span>
+      <h2>Karya Terbaru</h2>
+      <div class="card">
+        <h3>Sistem Informasi Kampus</h3>
+        <p>
+          Contoh konten yang akan direkonstruksi secara visual oleh efek Swarm Rebuild ketika tombol
+          di atas ditekan. Semua elemen digambar ulang melalui HTML5 Canvas overlay — wireframe oleh
+          Kursor A, pengetikan teks oleh Kursor B, dan pewarnaan/visual oleh Kursor C — tanpa
+          me-reflow DOM asli.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="certificates">
+      <span class="section-label">Sertifikat</span>
+      <h2>Sertifikat &amp; Badge</h2>
+      <p>AWS Academy Cloud Foundations · Huawei · Panitia Kegiatan Kampus</p>
+    </section>
+
+    <section class="section" id="contact">
+      <span class="section-label">Kontak</span>
+      <h2>Mari Terhubung</h2>
+      <p>WhatsApp 0823-8493-9468 · muhammadsyaiful2601@gmail.com · @muhammadsyaiful2601</p>
+    </section>
+
+    <footer>© 2025 Muhammad Syaiful. All rights reserved.</footer>
+
+    <script type="module">
+      import { triggerSwarmRebuild, cancelSwarmRebuild } from './swarm-rebuild.js';
+
+      const btn = document.getElementById('triggerSwarm');
+      const target = document.getElementById('about'); // hero yang sedang terlihat di viewport
+
+      btn.addEventListener('click', () => {
+        triggerSwarmRebuild(target, {
+          speed: 1,
+          onComplete: () => console.info('[swarm-rebuild] selesai — UI asli dikembalikan.'),
+          onCancel: () => console.info('[swarm-rebuild] dibatalkan — UI asli dikembalikan.'),
+        });
+      });
+
+      // Shortcut global: Ctrl/Cmd + Shift + R untuk trigger / cancel
+      // (modul juga mendaftarkan handler cancel-nya sendiri saat animasi berjalan)
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'r') {
+          const overlay = document.getElementById('swarm-rebuild-canvas');
+          if (overlay) {
+            e.preventDefault();
+            cancelSwarmRebuild();
+          } else {
+            e.preventDefault();
+            btn.click();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
