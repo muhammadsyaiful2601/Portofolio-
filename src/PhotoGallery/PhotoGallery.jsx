@@ -106,32 +106,21 @@ export default function PhotoGallery({ images }) {
   const activeCaption = activeIndex === null ? null : parseCaption(images[activeIndex]);
   const activeRarity = activeIndex === null ? null : rarityFor(images[activeIndex]);
 
-  const handleView = (e, i) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setActiveIndex(i);
-  };
-
   return (
     <div className="photo-gallery">
       <div className="ph-grid">
         {images.map((src, i) => (
-          <div
+          <button
             key={i}
+            type="button"
             className="ph-item"
             onClick={() => setActiveIndex(i)}
-            aria-label={`Lihat foto ${i + 1}`}
           >
-            <img src={src} alt={`Foto ${i + 1}`} loading="lazy" draggable="false" />
-            <a
-              href={src}
-              className="ph-download-btn"
-              onClick={(e) => handleView(e, i)}
-              aria-label={`Lihat foto ${i + 1} dalam popup`}
-            >
-              <i className="fas fa-image" /> Lihat Dokumentasi
-            </a>
-          </div>
+            <img src={src} alt={`Foto ${i + 1}`} loading="lazy" decoding="async" draggable="false" />
+            <span className="ph-download-btn">
+              <i className="fas fa-image" aria-hidden="true" /> Lihat Dokumentasi
+            </span>
+          </button>
         ))}
       </div>
 
@@ -195,7 +184,7 @@ export default function PhotoGallery({ images }) {
 
                   {/* Foto apa adanya — TANPA efek holo */}
                   <div className="ph-artbox">
-                    <img src={images[activeIndex]} alt="" draggable="false" />
+                    <img src={images[activeIndex]} alt="" decoding="async" draggable="false" />
                   </div>
 
                   <h3 className="ph-back-title">

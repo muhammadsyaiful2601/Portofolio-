@@ -1,0 +1,12 @@
+# Muhammad Syaiful — Portfolio
+
+> Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, desain, dan teknologi kreatif.
+
+## Ringkasan
+Portofolio pribadi berisi proyek, sertifikat, dan galeri karya Muhammad Syaiful.
+Situs ini adalah single-page portfolio statis (HTML + CSS + JavaScript) dengan komponen 3D interaktif.
+
+## Tautan penting
+- Beranda / Proyek / Sertifikat / Galeri / Kontak: https://muhammadsyaiful.vercel.app/
+- GitHub: https://github.com/muhammadsyaiful2601
+- Email: muhammadsyaiful2601@gmail.com

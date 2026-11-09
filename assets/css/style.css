@@ -14,6 +14,7 @@
   --text-secondary: #1a1a1a;
   --text-muted: #666666;
   --accent: #FF6B6B;
+  --accent-dark: #B91C1C;
   --accent-2: #4ECDC4;
   --accent-3: #FFE66D;
   --accent-4: #95E1D3;
@@ -182,7 +183,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--accent);
+  color: var(--accent-dark);
   transition: gap var(--transition);
 }
 
@@ -431,7 +432,7 @@ body.boot-active {
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dark);
   background: var(--accent-3);
   padding: 6px 16px;
   border: 3px solid var(--border);
@@ -488,7 +489,7 @@ body.boot-active {
 }
 
 .nav-logo span {
-  color: var(--accent);
+  color: var(--accent-dark);
   background: var(--accent-3);
   padding: 2px 8px;
   border: 2px solid var(--border);
@@ -684,14 +685,42 @@ body.boot-active {
   text-transform: uppercase;
 }
 
-.hero h1 .highlight {
-  color: var(--accent);
+/* Baris sapaan (dinamis lewat script.js) */
+.hero-greeting {
+  display: block;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  letter-spacing: -1px;
+  margin-bottom: 4px;
+}
+
+/* Wordmark interaktif (TechText) — pill kuning gaya sama seperti .highlight lama */
+.hero-name-techtext {
+  display: inline-block;
+  width: min(100%, 540px);
+  height: 104px;
   background: var(--accent-3);
+  color: var(--accent-dark);
   padding: 4px 12px;
   border: 3px solid var(--border);
   box-shadow: var(--shadow);
-  display: inline-block;
   transform: rotate(-1deg);
+  margin: 4px 0 12px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .hero-name-techtext {
+    height: 84px;
+    padding: 2px 8px;
+    width: min(100%, 420px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-name-techtext {
+    width: 100%;
+    height: 64px;
+  }
 }
 
 .hero p {
@@ -729,7 +758,7 @@ body.boot-active {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #fff;
   box-shadow: var(--shadow);
 }
@@ -927,7 +956,7 @@ body.boot-active {
 }
 
 .edu-item strong {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-weight: 800;
 }
 

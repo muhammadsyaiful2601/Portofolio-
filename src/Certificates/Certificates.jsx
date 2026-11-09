@@ -166,7 +166,6 @@ function CertCarousel({ title, icon, data, modifier }) {
               type="button"
               className="cert-card"
               onClick={(e) => handleCardClick(e, c.image)}
-              aria-label={`Lihat ${c.title}`}
             >
               <div className="cert-thumb">
                 <img src={c.image} alt={c.title} loading="lazy" decoding="async" width="460" height="345" draggable="false" />

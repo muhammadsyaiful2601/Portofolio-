@@ -5,16 +5,8 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.glb'],
   build: {
-    // Pisahkan vendor library ke chunk terpisah agar initial load lebih ringan
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          three: ['three', '@react-three/fiber', '@react-three/drei', '@react-three/rapier'],
-          gsap: ['gsap'],
-          meshline: ['meshline'],
-        },
-      },
-    },
+    // Komponen berat (three.js/WebGL) sudah di-lazy-load via React.lazy di src/main.jsx,
+    // jadi Vite otomatis mengeluarkannya ke async chunk — tidak menghalangi first paint.
+    chunkSizeWarningLimit: 3600,
   },
 });

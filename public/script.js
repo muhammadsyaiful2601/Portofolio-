@@ -1,29 +1,8 @@
 // === PRELOAD ASSET AWAL ============================
-// Semua resource yang ingin diunduh ke cache sebelum boot screen hilang
+// Hanya aset yang benar-benar dibutuhkan di atas fold. Sisanya dimuat
+// secara lazy (loading="lazy" / dynamic import) agar first paint cepat.
 const PRELOAD_ASSETS = [
-  // Profil (hero + about)
   'assets/profile/1.jpg',
-  'assets/profile/2.jpeg',
-  'assets/profile/3.jpeg',
-  'assets/profile/4.jpeg',
-  'assets/profile/5.jpeg',
-  // Sertifikat
-  'assets/sertifikat/sertifikat-panitia.png',
-  'assets/sertifikat/huawei-sertificat.jpeg',
-  'assets/sertifikat/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260829-20-271znt-1.png',
-  'assets/sertifikat/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260829-20-w9qs07-1.png',
-  // Website / project preview
-  'assets/website/Event Kampus.jpg',
-  'assets/website/WebGis.jpg',
-  'assets/website/Jadwal Kampus.jpg',
-  'assets/website/peminjaman.png',
-  'assets/website/spp.png',
-  // Model 3D Lanyard
-  'assets/lanyard/card.glb',
-  // Foto perjalanan (galeri) — ambil beberapa representatif agar boot tidak terlalu lama
-  'assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg',
-  'assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.41.45.jpeg',
-  'assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.02.jpeg'
 ];
 
 let assetsLoaded = 0;
@@ -32,7 +11,8 @@ const bootProgress = document.querySelector('.boot-progress');
 const bootStatus = document.querySelector('.boot-status');
 let preloadDone = false;
 let minTimeReached = false;
-const MIN_BOOT_TIME = 1500; // minimal boot screen tampil 1,5 detik agar tidak kaget
+const MIN_BOOT_TIME = 900; // boot screen tampil sebentar agar tidak berkedip
+const MAX_BOOT_TIME = 4000; // failsafe: boot pasti hilang setelah 4 detik
 
 // Kunci scroll saat boot screen aktif
 document.body.classList.add('boot-active');
@@ -62,9 +42,9 @@ function preloadAsset(src) {
 
 async function runPreloader() {
   // Jalankan semua preload secara paralel
-  await Promise.all(PRELOAD_ASSETS.map((src, i) => {
+  await Promise.all(PRELOAD_ASSETS.map((src) => {
     return preloadAsset(src).then(() => {
-      assetsLoaded = i + 1;
+      assetsLoaded++;
       updateBootProgress();
     });
   }));
@@ -75,6 +55,12 @@ async function runPreloader() {
 
 // Pastikan boot screen tidak hilang terlalu cepat
 setTimeout(() => { minTimeReached = true; checkBootComplete(); }, MIN_BOOT_TIME);
+// Failsafe: jangan biarkan boot screen nyangkut bila preload menggantung
+setTimeout(() => {
+  preloadDone = true;
+  minTimeReached = true;
+  checkBootComplete();
+}, MAX_BOOT_TIME);
 
 function checkBootComplete() {
   if (preloadDone && minTimeReached) {
@@ -189,7 +175,12 @@ if (profileImg) {
 }
 
 // === MATRIX RAIN BACKGROUND ===
+// Lewati animasi berat untuk pengguna yang memilih reduced motion
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!prefersReducedMotion) {
 const matrixCanvas = document.createElement('canvas');
+matrixCanvas.setAttribute('aria-hidden', 'true');
 matrixCanvas.id = 'matrixCanvas';
 document.body.prepend(matrixCanvas);
 const ctx = matrixCanvas.getContext('2d');
@@ -231,7 +222,7 @@ function drawMatrix() {
 }
 
 let matrixLastTime = 0;
-const matrixInterval = 1000 / 24; // ~24 FPS, cukup halus tapi hemat GPU
+const matrixInterval = 1000 / 18; // ~18 FPS, cukup halus tapi hemat GPU
 let matrixRunning = true;
 
 function animateMatrix(timestamp) {
@@ -264,6 +255,7 @@ document.addEventListener('visibilitychange', () => {
 function createParticles() {
   const container = document.createElement('div');
   container.className = 'particle-container';
+  container.setAttribute('aria-hidden', 'true');
   document.body.prepend(container);
   
   const particleCount = 25;
@@ -282,6 +274,7 @@ function createParticles() {
 }
 
 createParticles();
+}
 
 // === 3D TILT ON CARDS ===
 document.querySelectorAll('.about-card, .project-card, .skill-item, .contact-card').forEach(card => {
@@ -315,7 +308,7 @@ window.addEventListener('scroll', () => {
 });
 
 // === SCROLL REVEAL ===
-function handleScrollReveal() {
+let handleScrollReveal = function handleScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
   
   reveals.forEach(el => {
@@ -394,7 +387,7 @@ document.addEventListener('mousedown', () => {
 });
 
 // === DYNAMIC GREETING BASED ON TIME ===
-const greetingElement = document.querySelector('.hero h1');
+const greetingElement = document.getElementById('greetingLine');
 if (greetingElement) {
   const hour = new Date().getHours();
   let greeting = 'Halo';
@@ -402,8 +395,8 @@ if (greetingElement) {
   else if (hour < 15) greeting = 'Selamat Siang';
   else if (hour < 18) greeting = 'Selamat Sore';
   else greeting = 'Selamat Malam';
-  
-  greetingElement.innerHTML = greeting + ', saya<br><span class="highlight">Muhammad Syaiful</span>';
+
+  greetingElement.textContent = greeting + ', saya';
 }
 
 // === TEXT TRUNCATION WITH READ MORE ===

@@ -178,7 +178,7 @@
 }
 
 .pg-btn-video {
-  background: var(--accent, #ff6b6b);
+  background: var(--accent-dark, #b91c1c);
   color: #ffffff;
 }
 

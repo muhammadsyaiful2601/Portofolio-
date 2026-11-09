@@ -3,13 +3,8 @@ import { createRoot } from 'react-dom/client';
 // Komponen sertifikat me-mount sendiri ke #certificatesMount
 import './Certificates/Certificates.jsx';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Lanyard from './Lanyard/Lanyard.jsx';
-import profile1 from '../assets/profile/1.jpg';
-import profile2 from '../assets/profile/2.jpeg';
-import profile3 from '../assets/profile/3.jpeg';
-import profile4 from '../assets/profile/4.jpeg';
-import profile5 from '../assets/profile/5.jpeg';
+import React, { lazy, Suspense } from 'react';
+import TechText from './TechText/TechText.jsx';
 import ProjectGallery from './ProjectGallery/ProjectGallery.jsx';
 import eventImg from '../assets/website/Event Kampus.jpg';
 import webgisImg from '../assets/website/WebGis.jpg';
@@ -17,9 +12,6 @@ import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
 import peminjamanImg from '../assets/website/peminjaman.png';
 import sppImg from '../assets/website/spp.png';
 import PhotoGallery from './PhotoGallery/PhotoGallery.jsx';
-import DitherVeil from './DitherVeil/DitherVeil.jsx';
-import fotoAtas from '../assets/foto di bagian siapa saya/foto di atas.png';
-import fotoCursor from '../assets/foto di bagian siapa saya/foto ketika cursor.png';
 import foto1 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.51.jpeg';
 import foto2 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52 (1).jpeg';
 import foto3 from '../assets/foto perjalanan/WhatsApp Image 2026-08-06 at 12.29.52.jpeg';
@@ -53,111 +45,11 @@ import foto30 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43
 import foto31 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.03.jpeg';
 import foto32 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43.04.jpeg';
 import './Lanyard/Lanyard.css';
+import './DitherVeil/DitherVeil.css';
 
-const profiles = [
-  { front: profile1, back: profile2 },
-  { front: profile2, back: profile3 },
-  { front: profile3, back: profile4 },
-  { front: profile4, back: profile5 },
-  { front: profile5, back: profile1 },
-];
-
-function LanyardCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchStartX = useRef(null);
-
-  const next = useCallback(() => {
-    setActiveIndex(prev => (prev + 1) % profiles.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setActiveIndex(prev => (prev - 1 + profiles.length) % profiles.length);
-  }, []);
-
-  // Auto-advance every 5 seconds, pause on hover
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(next, 5000);
-    return () => clearInterval(interval);
-  }, [isPaused, next, activeIndex]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [next, prev]);
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) > 50) {
-      if (delta > 0) prev();
-      else next();
-    }
-    touchStartX.current = null;
-  };
-
-  const current = profiles[activeIndex];
-
-  return (
-    <div
-      className="lanyard-carousel"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      <Lanyard
-        key={activeIndex}
-        position={[0, 0, 20]}
-        gravity={[0, -40, 0]}
-        frontImage={current.front}
-        backImage={current.back}
-        imageFit="cover"
-      />
-
-      <button
-        className="lanyard-nav lanyard-nav-prev"
-        onClick={prev}
-        aria-label="Lanyard sebelumnya"
-      >
-        <i className="fas fa-chevron-left"></i>
-      </button>
-
-      <button
-        className="lanyard-nav lanyard-nav-next"
-        onClick={next}
-        aria-label="Lanyard berikutnya"
-      >
-        <i className="fas fa-chevron-right"></i>
-      </button>
-
-      <div className="lanyard-dots">
-        {profiles.map((_, i) => (
-          <button
-            key={i}
-            className={`lanyard-dot ${i === activeIndex ? 'active' : ''}`}
-            onClick={() => setActiveIndex(i)}
-            aria-label={`Lanyard ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      <div className="lanyard-counter">
-        {activeIndex + 1} / {profiles.length}
-      </div>
-    </div>
-  );
-}
+// Lazy-load komponen berat (three.js + WebGL) agar tidak memblokir initial load
+const LanyardCarousel = lazy(() => import('./Lanyard/LanyardCarousel.jsx'));
+const AboutDitherVeil = lazy(() => import('./AboutDitherVeil.jsx'));
 
 const projectsData = [
   {
@@ -217,14 +109,47 @@ const projectsData = [
   },
 ];
 
+const techTextMount = document.getElementById('techTextMount');
+
+if (techTextMount) {
+  createRoot(techTextMount).render(
+    <TechText
+      text="MUHAMMAD SYAIFUL"
+      fontWeight={800}
+      fontSize={110}
+      letterSpacing={-0.05}
+      align="center"
+      reveal="letter"
+      dashLength={4}
+      dashGap={2}
+      specks={15}
+      intro="none"
+      clickKick
+      guides={false}
+      color="#B91C1C"
+      accentColor="#000000"
+    />
+  );
+}
+
+const lanyardMount = document.getElementById('lanyardMount');
+
+if (lanyardMount) {
+  createRoot(lanyardMount).render(
+    <Suspense fallback={<div className="lanyard-fallback" aria-hidden="true" />}>
+      <LanyardCarousel />
+    </Suspense>
+  );
+}
+
 function Projects() {
   return <ProjectGallery projects={projectsData} />;
 }
 
-const mount = document.getElementById('lanyardMount');
+const projectsMount = document.getElementById('projectsMount');
 
-if (mount) {
-  createRoot(mount).render(<LanyardCarousel />);
+if (projectsMount) {
+  createRoot(projectsMount).render(<Projects />);
 }
 
 const galleryImages = [
@@ -239,46 +164,18 @@ function Gallery() {
   return <PhotoGallery images={galleryImages} />;
 }
 
-const projectsMount = document.getElementById('projectsMount');
-
-if (projectsMount) {
-  createRoot(projectsMount).render(<Projects />);
-}
-
 const galleryMount = document.getElementById('galleryMount');
 
 if (galleryMount) {
   createRoot(galleryMount).render(<Gallery />);
 }
 
-// Foto interaktif "Siapa Saya?": foto utama dicetak dither (gaya cetak),
-// di bawah cursor tampak foto penyamaran full-color hanya di area kursor
-function AboutDitherVeil() {
-  return (
-    <DitherVeil
-      src={fotoAtas}
-      revealSrc={fotoCursor}
-      pattern="floyd"
-      pixelSize={1}
-      palette="rgb"
-      levels={16}
-      inkColor="#141414"
-      paperColor="#FFFEF0"
-      revealRadius={150}
-      softness={0.6}
-      linger={1}
-      brightness={0.1}
-      contrast={1}
-      clickBurst
-    />
-  );
-}
-
 const aboutHalftoneMount = document.getElementById('aboutHalftoneMount');
 
 if (aboutHalftoneMount) {
-  createRoot(aboutHalftoneMount).render(<AboutDitherVeil />);
+  createRoot(aboutHalftoneMount).render(
+    <Suspense fallback={<div className="ditherveil-fallback" aria-hidden="true" />}>
+      <AboutDitherVeil />
+    </Suspense>
+  );
 }
-
-
-

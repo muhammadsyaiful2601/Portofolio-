@@ -113,7 +113,7 @@ export default function ProjectGallery({ projects }) {
               style={{ '--tag-color': p.accent || '#FF6B6B' }}
             >
               <div className="pg-thumb">
-                <img src={p.image} alt={p.title} loading="lazy" draggable="false" />
+                <img src={p.image} alt={p.title} loading="lazy" decoding="async" draggable="false" />
                 <span className="pg-badge">{String(i + 1).padStart(2, '0')}</span>
               </div>
               <div className="pg-info">
@@ -251,7 +251,7 @@ function renderMedia(project) {
 
   return (
     <div className="pg-video pg-video-placeholder">
-      <img src={project.image} alt={project.title} />
+      <img src={project.image} alt={project.title} decoding="async" />
       <div className="pg-video-overlay">
         <div className="pg-video-icon">
           <i className="fas fa-external-link-alt" />

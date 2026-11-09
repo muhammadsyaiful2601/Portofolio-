@@ -4,6 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Muhammad Syaiful — Portfolio</title>
+    <meta
+      name="description"
+      content="Portofolio Muhammad Syaiful — Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, desain, dan teknologi kreatif. Lihat proyek, sertifikat, dan galeri karya."
+    />
+    <meta name="author" content="Muhammad Syaiful" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="canonical" href="https://muhammadsyaiful.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- ===== Open Graph / Social ===== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muhammadsyaiful.vercel.app/" />
+    <meta property="og:title" content="Muhammad Syaiful — Portfolio" />
+    <meta
+      property="og:description"
+      content="Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, desain, dan teknologi kreatif."
+    />
+    <meta property="og:image" content="https://muhammadsyaiful.vercel.app/og-image.jpg" />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Muhammad Syaiful — Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Mahasiswa Politeknik Negeri Padang yang antusias dalam pengembangan web, desain, dan teknologi kreatif."
+    />
+    <meta name="twitter:image" content="https://muhammadsyaiful.vercel.app/og-image.jpg" />
+
+    <!-- ===== PRECONNECT (percepat koneksi ke CDN pihak ketiga) ===== -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -13,21 +46,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
-
-    <!-- ===== PRELOAD ASSET KRITIS ===== -->
-    <link rel="preload" as="image" href="assets/profile/1.jpg" />
-    <link rel="preload" as="image" href="assets/profile/2.jpeg" />
-    <link rel="preload" as="image" href="assets/profile/3.jpeg" />
-    <link rel="preload" as="image" href="assets/profile/4.jpeg" />
-    <link rel="preload" as="image" href="assets/profile/5.jpeg" />
-    <link rel="preload" as="image" href="assets/sertifikat/sertifikat-panitia.png" />
-    <link rel="preload" as="image" href="assets/sertifikat/huawei-sertificat.jpeg" />
-    <link rel="preload" as="image" href="assets/website/Event Kampus.jpg" />
-    <link rel="preload" as="image" href="assets/website/WebGis.jpg" />
-    <link rel="preload" as="image" href="assets/website/Jadwal Kampus.jpg" />
-    <link rel="preload" as="image" href="assets/website/peminjaman.png" />
-    <link rel="preload" as="image" href="assets/website/spp.png" />
-    <link rel="preload" as="fetch" href="assets/lanyard/card.glb" />
   </head>
   <body>
     <!-- ===== BOOTING SPLASH SCREEN ===== -->
@@ -77,6 +95,7 @@
       <a href="#contact" onclick="closeMobileMenu()">Kontak</a>
     </div>
 
+    <main>
     <!-- ===== HERO ===== -->
     <section class="hero">
       <div class="container">
@@ -86,9 +105,9 @@
               <span class="dot"></span>
               Tersedia untuk berkolaborasi
             </div>
-            <h1>
-              Halo, saya<br />
-              <span class="highlight">Muhammad Syaiful</span>
+            <h1 class="hero-title">
+              <span class="hero-greeting" id="greetingLine">Halo, saya</span>
+              <span id="techTextMount" class="hero-name-techtext"></span>
             </h1>
             <p>
               Mahasiswa Politeknik Negeri Padang yang antusias dalam
@@ -279,6 +298,8 @@
       </div>
     </section>
 
+    </main>
+
     <!-- ===== FOOTER ===== -->
     <footer>
       <div class="container">
@@ -289,7 +310,7 @@
     <!-- ===== MODAL ===== -->
     <div class="modal" id="imageModal">
       <button class="close" onclick="closeModal()">&times;</button>
-      <img id="modalImg" src="" alt="Preview" />
+      <img id="modalImg" src="" alt="Preview" decoding="async" />
     </div>
 
     <!-- ===== SCROLL TO TOP ===== -->

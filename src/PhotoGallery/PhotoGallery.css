@@ -16,6 +16,9 @@
 
 .ph-item {
   position: relative;
+  width: 100%;
+  font: inherit;
+  text-align: inherit;
   padding: 0;
   border: none;
   background: var(--surface-hover);
