@@ -1617,3 +1617,37 @@ body {
     scrollbar-width: thin;
   }
 }
+/* ===== MOBILE: fix grid blowout pada kartu Tentang ===== */
+.about-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.about-body,
+.about-toggle-btn {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .about-card h3 {
+    font-size: 0.66rem !important;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .about-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.6rem !important;
+    padding: 6px 5px !important;
+    gap: 5px !important;
+    white-space: normal;
+    text-align: center;
+    letter-spacing: 0.4px !important;
+  }
+
+  .about-toggle-btn i {
+    font-size: 0.55rem;
+  }
+}
