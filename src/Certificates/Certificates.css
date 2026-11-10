@@ -1,54 +1,243 @@
-/* ===== CERTIFICATES (Horizontal Carousel) ===== */
+/* ===== CERTIFICATES (Horizontal Carousel Tiket) ===== */
+
+.cert-fallback {
+  width: 100%;
+  height: 280px;
+  margin-top: 40px;
+  background: linear-gradient(110deg, rgba(255,255,255,0.04) 8%, rgba(255,255,255,0.1) 18%, rgba(255,255,255,0.04) 33%);
+  background-size: 200% 100%;
+  animation: cert-shimmer 1.4s linear infinite;
+}
+
+@keyframes cert-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 .cert-root {
   margin-top: 40px;
 }
 
-/* Lebar kartu di dalam scroller horizontal — dibuat besar agar
-   selalu ada ruang scroll kiri/kanan dalam container 1000px */
-.cert-card {
+/* Tiket di dalam scroller horizontal */
+.pg-scroller > .tear-ticket {
   flex: 0 0 auto;
-  width: 460px;
-  max-width: 82vw;
   scroll-snap-align: start;
-  transform: none !important;
-  /* Naikkan ke compositor layer agar transform hover tidak trigger repaint layout */
-  will-change: transform;
-  contain: layout style paint;
-  transform: translateZ(0);
 }
 
-.cert-card:hover {
-  transform: translate(-3px, -3px) translateZ(0) !important;
-  box-shadow: 8px 8px 0px var(--border) !important;
+/* ===== Isi tiket (body) ===== */
+.cert-ticket-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 12px;
+  gap: 8px;
 }
 
-/* Sertifikat: thumbnail landscape dokumen */
-.cert-scroller-wide .cert-thumb {
-  aspect-ratio: 4 / 3;
+.cert-type {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #000000;
+  border: 2px solid #000000;
+  padding: 3px 10px;
 }
 
-.cert-scroller-wide .cert-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.cert-ticket-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-/* Badge: thumbnail persegi, gambar utuh */
-.cert-scroller-badges .cert-card {
-  width: 540px;
+.cert-ticket-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #000000;
 }
 
-.cert-scroller-badges .cert-thumb {
-  aspect-ratio: 1 / 1;
+.cert-ticket-issuer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #000000;
 }
 
-.cert-scroller-badges .cert-thumb img {
-  width: 100%;
+/* ===== Stempel (stub) ===== */
+.cert-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   height: 100%;
+  padding: 10px 8px;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.cert-stamp-admit {
+  background: #000000;
+  color: #FFE66D;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  padding: 4px 8px;
+}
+
+.cert-stamp-hint {
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  line-height: 1.5;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.cert-stamp-no {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #B91C1C;
+  border-top: 2px dashed #000000;
+  border-bottom: 2px dashed #000000;
+  padding: 6px 10px;
+}
+
+/* Kartu badge (FlipCard) di dalam scroller horizontal */
+.pg-scroller > .flip-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* ===== Wajah depan badge ===== */
+.badge-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  padding: 12px;
+}
+
+.badge-front .cert-type {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.badge-image {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
   object-fit: contain;
-  padding: 28px;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.badge-front-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #000000;
+  color: #FFE66D;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  padding: 5px 10px;
+}
+
+/* ===== Wajah belakang badge ===== */
+.badge-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  background: #FFFEF0;
+  padding: 14px;
+  color: #000000;
+}
+
+.badge-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+.badge-issuer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.badge-no {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #B91C1C;
+  border-top: 2px dashed #000000;
+  border-bottom: 2px dashed #000000;
+  padding: 6px 10px;
+}
+
+.badge-view {
+  margin-top: auto;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #000000;
+  color: #FFFEF0;
+  border: 2px solid #000000;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.badge-view:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000000;
+  background: #B91C1C;
+}
+
+.badge-view:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000000;
+}
+
+.badge-view:focus-visible {
+  outline: 3px solid #B91C1C;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .cert-ticket-title {
+    font-size: 0.74rem;
+  }
+
+  .cert-stamp-hint {
+    font-size: 0.5rem;
+  }
 }

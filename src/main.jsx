@@ -1,11 +1,6 @@
 import { createRoot } from 'react-dom/client';
-
-// Komponen sertifikat me-mount sendiri ke #certificatesMount
-import './Certificates/Certificates.jsx';
-
 import React, { lazy, Suspense } from 'react';
 import TechText from './TechText/TechText.jsx';
-import ProjectGallery from './ProjectGallery/ProjectGallery.jsx';
 import eventImg from '../assets/website/Event Kampus.jpg';
 import webgisImg from '../assets/website/WebGis.jpg';
 import jadwalImg from '../assets/website/Jadwal Kampus.jpg';
@@ -47,9 +42,11 @@ import foto32 from '../assets/foto perjalanan/WhatsApp Image 2026-08-29 at 19.43
 import './Lanyard/Lanyard.css';
 import './DitherVeil/DitherVeil.css';
 
-// Lazy-load komponen berat (three.js + WebGL) agar tidak memblokir initial load
+// Lazy-load komponen berat (three.js + WebGL + motion) agar tidak memblokir initial load
 const LanyardCarousel = lazy(() => import('./Lanyard/LanyardCarousel.jsx'));
 const AboutDitherVeil = lazy(() => import('./AboutDitherVeil.jsx'));
+const Certificates = lazy(() => import('./Certificates/Certificates.jsx'));
+const ProjectGallery = lazy(() => import('./ProjectGallery/ProjectGallery.jsx'));
 
 const projectsData = [
   {
@@ -149,7 +146,11 @@ function Projects() {
 const projectsMount = document.getElementById('projectsMount');
 
 if (projectsMount) {
-  createRoot(projectsMount).render(<Projects />);
+  createRoot(projectsMount).render(
+    <Suspense fallback={<div className="pg-fallback" aria-hidden="true" />}>
+      <Projects />
+    </Suspense>
+  );
 }
 
 const galleryImages = [
@@ -176,6 +177,16 @@ if (aboutHalftoneMount) {
   createRoot(aboutHalftoneMount).render(
     <Suspense fallback={<div className="ditherveil-fallback" aria-hidden="true" />}>
       <AboutDitherVeil />
+    </Suspense>
+  );
+}
+
+const certificatesMount = document.getElementById('certificatesMount');
+
+if (certificatesMount) {
+  createRoot(certificatesMount).render(
+    <Suspense fallback={<div className="cert-fallback" aria-hidden="true" />}>
+      <Certificates />
     </Suspense>
   );
 }

@@ -15,7 +15,7 @@ export default function AboutDitherVeil() {
       levels={16}
       inkColor="#141414"
       paperColor="#FFFEF0"
-      revealRadius={150}
+      revealRadius={60}
       softness={0.6}
       linger={1}
       brightness={0.1}

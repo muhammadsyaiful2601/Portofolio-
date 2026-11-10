@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+﻿/* ===== RESET & BASE ===== */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -61,140 +61,6 @@ body {
 
 .cert-group-title i {
   color: var(--accent);
-}
-
-.certificates-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px;
-  margin-top: 0;
-}
-
-/* Sertifikat: kartu lebar (format landscape dokumen) */
-.cert-grid-wide {
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-}
-
-/* Badge: kartu persegi (format badge bulat/persegi) */
-.cert-grid-badges {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-
-.cert-grid-badges .cert-thumb {
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cert-grid-badges .cert-thumb img {
-  object-fit: contain;
-  padding: 24px;
-}
-
-.cert-card {
-  background: var(--surface);
-  border: 4px solid var(--border);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition);
-  position: relative;
-  padding: 0;
-  text-align: left;
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  will-change: transform;
-  contain: layout style paint;
-  transform: translateZ(0);
-}
-
-.cert-card:hover {
-  transform: translate(-6px, -6px) translateZ(0);
-  box-shadow: 12px 12px 0px var(--border);
-}
-
-.cert-thumb {
-  position: relative;
-  border-bottom: 4px solid var(--border);
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  background: var(--surface-hover);
-}
-
-.cert-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.cert-card:hover .cert-thumb img {
-  transform: scale(1.05);
-}
-
-.cert-type {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 12px;
-  border: 3px solid var(--border);
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.cert-body {
-  padding: 20px;
-  background: var(--surface);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cert-body h3 {
-  font-size: 1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  line-height: 1.4;
-}
-
-.cert-body p {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.cert-view {
-  margin-top: auto;
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--accent-dark);
-  transition: gap var(--transition);
-}
-
-.cert-card:hover .cert-view {
-  gap: 14px;
-}
-
-@media (max-width: 640px) {
-  .certificates-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ===== BOOTING SPLASH SCREEN ===== */
@@ -1532,7 +1398,6 @@ img {
 .will-change-transform,
 .btn,
 .project-card,
-.cert-card,
 .contact-card,
 .about-card,
 #scrollTop {
@@ -1586,7 +1451,14 @@ img {
 
   .btn { padding: 12px 22px; font-size: 0.9rem; }
 
-  .about-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .about-card { padding: 16px; }
+  .about-card .icon { width: 42px; height: 42px; font-size: 1.15rem; margin-bottom: 10px; }
+  .about-card h3 { font-size: 0.9rem; margin-bottom: 6px; letter-spacing: 0; }
+  .about-card p { font-size: 0.8rem; line-height: 1.5; }
+  .edu-list { margin-top: 10px; gap: 8px; }
+  .edu-item { font-size: 0.72rem; padding: 8px 10px; gap: 6px; border-width: 2px; box-shadow: 2px 2px 0px var(--border); }
+  .edu-icon { width: 24px; height: 24px; font-size: 0.7rem; border-width: 2px; }
   .projects-grid { grid-template-columns: 1fr; }
   .projects-swap-wrapper { height: 450px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1608,6 +1480,9 @@ img {
   .contact-card { min-width: 100%; }
   .gallery-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-card { padding: 12px; border-width: 3px; }
+  .about-card p { font-size: 0.72rem; }
+  .edu-item { font-size: 0.66rem; padding: 6px 8px; }
 }
 
 /* ===== ABOUT HALFTONE (foto interaktif cursor) ===== */
