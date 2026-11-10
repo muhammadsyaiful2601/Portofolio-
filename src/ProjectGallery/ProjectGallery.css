@@ -721,3 +721,27 @@
     font-size: 0.75rem;
   }
 }
+/* ===== MOBILE: zona proyek jadi carousel horizontal ===== */
+@media (max-width: 768px) {
+  .pg-zone-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    max-height: none;
+    padding: 4px 4px 12px;
+    scrollbar-width: thin;
+  }
+
+  .pg-zone-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+
+  .pg-zone-thumb {
+    height: 130px;
+  }
+}
