@@ -745,3 +745,64 @@
     height: 130px;
   }
 }
+/* ===== HALAMAN PROYEK DI DALAM FOLDER ===== */
+.project-page {
+  position: absolute;
+  inset: 0;
+  background: #0d0d12;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.project-page-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.project-page-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 24px 10px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+}
+
+.project-page-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #000000;
+  background: var(--tag-color, #FFE66D);
+  border: 1px solid #000000;
+  padding: 2px 5px;
+  flex: none;
+}
+
+.project-page-title {
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #FFFEF0;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+  .project-page-title {
+    font-size: 0.52rem;
+  }
+}
