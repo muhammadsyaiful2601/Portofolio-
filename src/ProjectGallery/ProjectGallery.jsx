@@ -30,14 +30,6 @@ export default function ProjectGallery({ projects }) {
   return (
     <div className="pg-root" id="projectGalleryRoot">
       <div className="pg-folder-row">
-        <div className="pg-folder-copy">
-          <span className="pg-folder-kicker">Portofolio</span>
-          <p className="pg-folder-caption">
-            Sentuh folder untuk membuka — proyek sebar keluar. Drag halaman untuk memindahkannya, seret kembali ke
-            folder untuk mengembalikan. Ketuk halaman untuk melihat detail &amp; demo video.
-          </p>
-        </div>
-
         <Folder
           items={projects.map((p, i) => (
             <div className="project-page" key={p.id} style={{ '--tag-color': p.accent || '#FF6B6B' }}>
