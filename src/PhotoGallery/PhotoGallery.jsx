@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './PhotoGallery.css';
 import HoloCard from '../HoloCard/HoloCard.jsx';
 
 /**
- * PhotoGallery — galeri foto ala aplikasi galeri HP.
+ * PhotoGallery â€” galeri foto ala aplikasi galeri HP.
  * Grid foto responsif, tap untuk membuka lightbox layar penuh
  * dengan navigasi next/prev, swipe, dan keyboard (panah / Escape).
  * Foto di lightbox tampil sebagai kartu holografik (HoloCard, WebGL).
@@ -15,14 +15,14 @@ const MONTHS_ID = [
   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
 ];
 
-// Tingkat kelangkaan gaya kartu Pokémon — ditentukan deterministik dari hash nama file (stabil di semua build)
+// Tingkat kelangkaan gaya kartu PokÃ©mon â€” ditentukan deterministik dari hash nama file (stabil di semua build)
 const RARITIES = [
-  { id: 'common', label: 'Common', symbol: '●', color: '#d1d5db', weight: 40 },
-  { id: 'uncommon', label: 'Uncommon', symbol: '◆', color: '#4ade80', weight: 25 },
-  { id: 'rare', label: 'Rare', symbol: '★', color: '#60a5fa', weight: 18 },
-  { id: 'holo', label: 'Holo Rare', symbol: '★★', color: '#fde047', weight: 10 },
-  { id: 'ultra', label: 'Ultra Rare', symbol: '★★★', color: '#f472b6', weight: 5 },
-  { id: 'secret', label: 'Secret Rare', symbol: '★★★★', color: '#c084fc', weight: 2 },
+  { id: 'common', label: 'Common', symbol: 'â—', color: '#d1d5db', weight: 40 },
+  { id: 'uncommon', label: 'Uncommon', symbol: 'â—†', color: '#4ade80', weight: 25 },
+  { id: 'rare', label: 'Rare', symbol: 'â˜…', color: '#60a5fa', weight: 18 },
+  { id: 'holo', label: 'Holo Rare', symbol: 'â˜…â˜…', color: '#fde047', weight: 10 },
+  { id: 'ultra', label: 'Ultra Rare', symbol: 'â˜…â˜…â˜…', color: '#f472b6', weight: 5 },
+  { id: 'secret', label: 'Secret Rare', symbol: 'â˜…â˜…â˜…â˜…', color: '#c084fc', weight: 2 },
 ];
 
 const rarityFor = (src) => {
@@ -43,7 +43,7 @@ const rarityFor = (src) => {
   return RARITIES[0];
 };
 
-// Nama file WhatsApp menyimpan timestamp, mis. "2026-08-06 at 12.29.51" — dipakai sebagai caption otomatis
+// Nama file WhatsApp menyimpan timestamp, mis. "2026-08-06 at 12.29.51" â€” dipakai sebagai caption otomatis
 const parseCaption = (src) => {
   try {
     const decoded = decodeURIComponent(String(src));
@@ -61,7 +61,11 @@ const parseCaption = (src) => {
 export default function PhotoGallery({ images }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const touchStartX = useRef(null);
-  const total = images.length;
+  // Terima string (URL) atau objek { src, name } â€” name dipakai untuk caption & rarity
+  const items = images.map((img) =>
+    typeof img === 'string' ? { src: img, name: img } : img
+  );
+  const total = items.length;
 
   const close = useCallback(() => setActiveIndex(null), []);
   const next = useCallback(
@@ -103,20 +107,20 @@ export default function PhotoGallery({ images }) {
     touchStartX.current = null;
   };
 
-  const activeCaption = activeIndex === null ? null : parseCaption(images[activeIndex]);
-  const activeRarity = activeIndex === null ? null : rarityFor(images[activeIndex]);
+  const activeCaption = activeIndex === null ? null : parseCaption(items[activeIndex].name);
+  const activeRarity = activeIndex === null ? null : rarityFor(items[activeIndex].name);
 
   return (
     <div className="photo-gallery">
       <div className="ph-grid">
-        {images.map((src, i) => (
+        {items.map((img, i) => (
           <button
             key={i}
             type="button"
             className="ph-item"
             onClick={() => setActiveIndex(i)}
           >
-            <img src={src} alt={`Foto ${i + 1}`} loading="lazy" decoding="async" draggable="false" />
+            <img src={img.src} alt={`Foto ${i + 1}`} loading="lazy" decoding="async" draggable="false" />
             <span className="ph-download-btn">
               <i className="fas fa-image" aria-hidden="true" /> Lihat Dokumentasi
             </span>
@@ -152,7 +156,7 @@ export default function PhotoGallery({ images }) {
           <div className="ph-stage" onClick={(e) => e.stopPropagation()}>
             <HoloCard
               key={activeIndex}
-              image={images[activeIndex]}
+              image={items[activeIndex].src}
               alt={`Foto ${activeIndex + 1}`}
               preset={HOLO_PRESETS[activeIndex % HOLO_PRESETS.length]}
               intensity={0.6}
@@ -173,7 +177,7 @@ export default function PhotoGallery({ images }) {
                       style={{ '--rarity-color': activeRarity ? activeRarity.color : '#d1d5db' }}
                     >
                       <span className="ph-rarity-symbol" aria-hidden="true">
-                        {activeRarity ? activeRarity.symbol : '●'}
+                        {activeRarity ? activeRarity.symbol : 'â—'}
                       </span>
                       {activeRarity ? activeRarity.label : 'Common'}
                     </span>
@@ -182,9 +186,9 @@ export default function PhotoGallery({ images }) {
                     </span>
                   </div>
 
-                  {/* Foto apa adanya — TANPA efek holo */}
+                  {/* Foto apa adanya â€” TANPA efek holo */}
                   <div className="ph-artbox">
-                    <img src={images[activeIndex]} alt="" decoding="async" draggable="false" />
+                    <img src={items[activeIndex].src} alt="" decoding="async" draggable="false" />
                   </div>
 
                   <h3 className="ph-back-title">
@@ -192,12 +196,12 @@ export default function PhotoGallery({ images }) {
                   </h3>
                   {activeCaption ? (
                     <p className="ph-back-date">
-                      {activeCaption.dateLabel} · {activeCaption.timeLabel} WIB
+                      {activeCaption.dateLabel} Â· {activeCaption.timeLabel} WIB
                     </p>
                   ) : (
                     <p className="ph-back-date">Momen Perjalanan</p>
                   )}
-                  <p className="ph-back-name">— Muhammad Syaiful</p>
+                  <p className="ph-back-name">â€” Muhammad Syaiful</p>
                 </div>
               }
             />

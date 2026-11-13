@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import certAwsFoundations from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260829-20-271znt-1.png';
-import certAwsArchitecting from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260829-20-w9qs07-1.png';
-import certHuawei from '../../assets/sertifikat/huawei-sertificat.jpeg';
-import certHuaweiOverviewAi from '../../assets/sertifikat/huawei-overview-of-ai.jpg';
-import certPanitia from '../../assets/sertifikat/sertifikat-panitia.png';
-import badgeAwsFoundations from '../../assets/badge/aws-academy-graduate-cloud-foundations-training-bad.png';
-import badgeAwsArchitecting from '../../assets/badge/aws-academy-graduate-cloud-architecting-training-ba.png';
+import { SERTIFIKAT, BADGE } from '../drive-assets.js';
+
+const certAwsFoundations = SERTIFIKAT.awsFoundations;
+const certAwsArchitecting = SERTIFIKAT.awsArchitecting;
+const certHuawei = SERTIFIKAT.huawei;
+const certHuaweiOverviewAi = SERTIFIKAT.overviewOfAi;
+const certPanitia = SERTIFIKAT.panitia;
+const badgeAwsFoundations = BADGE.awsFoundations;
+const badgeAwsArchitecting = BADGE.awsArchitecting;
 import TearTicket from '../TearTicket/TearTicket.jsx';
 import FlipCard from '../FlipCard/FlipCard.jsx';
 import './Certificates.css';
