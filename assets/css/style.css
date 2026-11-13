@@ -1651,3 +1651,10 @@ body {
     font-size: 0.55rem;
   }
 }
+
+/* Section Proyek: konten pendek (folder saja), gap bawah jangan sejauh section lain */
+#projects {
+  padding-bottom: 48px;
+  margin-bottom: 0;
+}
+
