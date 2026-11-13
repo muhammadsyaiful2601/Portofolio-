@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import certAwsFoundations from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260829-20-271znt-1.png';
 import certAwsArchitecting from '../../assets/sertifikat/AWS_Academy_Graduate___Cloud_Architecting___Training_Badge_Badge20260829-20-w9qs07-1.png';
 import certHuawei from '../../assets/sertifikat/huawei-sertificat.jpeg';
+import certHuaweiOverviewAi from '../../assets/sertifikat/huawei-overview-of-ai.jpg';
 import certPanitia from '../../assets/sertifikat/sertifikat-panitia.png';
 import badgeAwsFoundations from '../../assets/badge/aws-academy-graduate-cloud-foundations-training-bad.png';
 import badgeAwsArchitecting from '../../assets/badge/aws-academy-graduate-cloud-architecting-training-ba.png';
@@ -36,6 +37,15 @@ const certificatesData = [
     image: certHuawei,
     accent: 'var(--accent-4)',
     no: '882145',
+  },
+  {
+    id: 'huawei-overview-of-ai',
+    title: 'Overview of AI',
+    issuer: 'Huawei ICT Academy',
+    type: 'Sertifikat',
+    image: certHuaweiOverviewAi,
+    accent: 'var(--accent-4)',
+    no: 'ICT20261113113488',
   },
   {
     id: 'sertifikat-panitia',
